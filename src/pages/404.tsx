@@ -1,5 +1,7 @@
 import * as React from "react"
-import {Link, HeadFC, PageProps} from "gatsby"
+import type {DataProps} from "@core/types"
+import {PageProps, HeadProps, graphql} from "gatsby"
+import {Link} from "gatsby"
 import {Container, Title, Text, Button, Stack} from '@mantine/core'
 import Logo from "@components/Logo"
 
@@ -29,4 +31,23 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
 export default NotFoundPage
 
-export const Head: HeadFC = () => <title>Page not found</title>
+export const Head = ({data}: HeadProps<DataProps>) => <title>Page not found · {data.site.siteMetadata.title}</title>
+
+export const query = graphql`
+    query HomePageQuery {
+        site {
+            siteMetadata {
+                title
+                description
+                websiteUrl
+                blogUrl
+                careersUrl
+                githubUrl
+                xUrl
+                youtubeUrl
+                joinUsUrl
+                generatedAt
+            }
+        }
+    }
+`
