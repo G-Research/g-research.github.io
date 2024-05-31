@@ -12,7 +12,7 @@ export const TOPIC_OPTIONS: string[] = Array.from(new Set(repos.flatMap((repo) =
 
 
 export const SORT_BY_OPTIONS: string[] = [
+    "Last Updated",
     "Name",
     "Stars",
-    "Last Updated",
 ]
