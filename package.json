@@ -1,0 +1,44 @@
+{
+  "name": "g-research",
+  "version": "0.1.0",
+  "private": false,
+  "description": "G-Research OSS website",
+  "author": "G-Research",
+  "keywords": [
+    "g-research",
+    "oss"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.8.0",
+    "@mantine/dates": "^7.8.0",
+    "@mantine/form": "^7.8.0",
+    "@mantine/hooks": "^7.8.0",
+    "@mantine/modals": "^7.8.0",
+    "@tabler/icons-react": "^3.2.0",
+    "dayjs": "^1.11.10",
+    "gatsby": "^5.13.3",
+    "gatsby-plugin-postcss": "^6.13.1",
+    "octokit": "^4.0.2",
+    "postcss": "^8.4.38",
+    "postcss-preset-mantine": "^1.14.4",
+    "postcss-simple-vars": "^7.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "gatsby-plugin-dts-css-modules": "^3.0.0",
+    "gatsby-plugin-tsconfig-paths": "^1.0.6",
+    "typescript": "^5.3.3"
+  }
+}
