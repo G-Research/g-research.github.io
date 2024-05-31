@@ -50,7 +50,7 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
         <>
             <Header description={description} socials={socials}/>
             <HeroSection/>
-            <Container component="main" py="md" size="xl">
+            <Container component="main" py="xl" size="xl" mb='xl' id='projects'>
                 <ProjectsSection/>
             </Container>
             <Footer
