@@ -1,6 +1,7 @@
 import type {GatsbyConfig} from "gatsby";
 
 const config: GatsbyConfig = {
+    pathPrefix: process.env.PATH_PREFIX || ``, // add a prefix to all paths
     siteMetadata: {
         title: `G-Research`,
         description: `Open-Source Software at G-Research`,
