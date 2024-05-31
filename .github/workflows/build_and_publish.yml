@@ -64,7 +64,7 @@ jobs:
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'
-          PATH_PREFIX: ${{ emv.PATH_PREFIX }}
+          PATH_PREFIX: ${{ env.PATH_PREFIX }}
         run: yarn run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
