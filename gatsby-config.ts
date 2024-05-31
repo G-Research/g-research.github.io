@@ -1,5 +1,7 @@
 import type {GatsbyConfig} from "gatsby";
 
+console.log(`process.env.PATH_PREFIX: ${process.env.PATH_PREFIX}`);
+
 const config: GatsbyConfig = {
     pathPrefix: process.env.PATH_PREFIX || ``, // add a prefix to all paths
     siteMetadata: {

@@ -61,10 +61,19 @@ jobs:
             ${{ runner.os }}-gatsby-build-
       - name: Install dependencies
         run: yarn install
+      - name: Set environment variables
+        id: set-env
+        run: |
+          if [ "${{ github.event.repository.fork }}" == "true" ]; then
+            echo "PATH_PREFIX=${{ github.repository }}" >> $GITHUB_OUTPUT
+            echo "PREFIX_PATHS=true" >> $GITHUB_OUTPUT
+          else
+            echo "PREFIX_PATHS=false" >> $GITHUB_OUTPUT
+          fi
       - name: Build with Gatsby
         env:
-          PREFIX_PATHS: 'true'
-          PATH_PREFIX: ${{ env.PATH_PREFIX }}
+          PREFIX_PATHS: ${{ steps.set-env.outputs.PREFIX_PATHS }}
+          PATH_PREFIX: ${{ steps.set-env.outputs.PATH_PREFIX }}
         run: yarn run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
