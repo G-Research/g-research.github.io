@@ -60,7 +60,8 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
                 />
                 <FeaturedSection/>
                 <Divider
-                    my={{base: rem(32), sm: rem(64)}}
+                    mt={{base: rem(32), sm: rem(96)}}
+                    mb={rem(32)}
                     labelPosition="center"
                     label={
                         <Title id='all-projects' size="h2" py="lg" ta="center" c="blue">ALL PROJECTS</Title>
