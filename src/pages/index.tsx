@@ -2,7 +2,7 @@ import * as React from "react"
 import type {PageProps, HeadProps} from "gatsby"
 import type {DataProps} from "@core/types"
 import {graphql} from 'gatsby'
-import {Container} from '@mantine/core'
+import {Container, Divider, Title, rem} from '@mantine/core'
 import {
     IconBrandX,
     IconBrandYoutube,
@@ -10,6 +10,7 @@ import {
 } from '@tabler/icons-react';
 import Footer from '@components/Footer'
 import Header from '@components/Header'
+import FeaturedSection from "@components/IndexPage/FeaturedSection"
 import ProjectsSection from "@components/IndexPage/ProjectsSection"
 import HeroSection from "@components/IndexPage/HeroSection"
 
@@ -50,7 +51,21 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
         <>
             <Header description={description} socials={socials}/>
             <HeroSection/>
-            <Container component="main" py="xl" size="xl" mb='xl' id='projects'>
+            <Container component="main" pb="xl" size="xl" mb='xl'>
+                <Divider
+                    labelPosition="center"
+                    label={
+                        <Title id='featured-projects' size="h2" py="lg" ta="center" c="blue">FEATURED PROJECTS</Title>
+                    }
+                />
+                <FeaturedSection/>
+                <Divider
+                    my={{base: rem(32), sm: rem(64)}}
+                    labelPosition="center"
+                    label={
+                        <Title id='all-projects' size="h2" py="lg" ta="center" c="blue">ALL PROJECTS</Title>
+                    }
+                />
                 <ProjectsSection/>
             </Container>
             <Footer
