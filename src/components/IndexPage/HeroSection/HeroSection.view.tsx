@@ -1,4 +1,4 @@
-import {Container, Text, Button, Group, Space} from '@mantine/core'
+import {Container, Text, Button, Flex, Space} from '@mantine/core'
 import * as React from "react"
 import {IconBrandGithub, IconChevronsDown} from '@tabler/icons-react'
 import * as classes from './HeroSection.module.css'
@@ -23,13 +23,16 @@ export default function HeroSectionView(): React.JSX.Element {
                 support them.
             </Text>
 
-            <Group className={classes.controls}>
+            <Flex pt='xl'
+                  align={{base: "stretch", sm: "space-between"}}
+                  direction={{base: 'column', sm: 'row'}}
+                  gap={{base: 'md', sm: 'lg'}}
+            >
                 <Button
                     component='a'
-                    href='#projects'
-                    size="md"
+                    href='#all-projects'
+                    size="lg"
                     variant="gradient"
-                    className={classes.control}
                     gradient={{from: 'blue', to: 'cyan'}}
                     leftSection={<IconChevronsDown size={20}/>}
                 >
@@ -40,14 +43,13 @@ export default function HeroSectionView(): React.JSX.Element {
                     component="a"
                     href="https://github.com/G-Research"
                     target="_blank" rel="noopener noreferrer"
-                    size="md"
+                    size="lg"
                     variant="default"
-                    className={classes.control}
                     leftSection={<IconBrandGithub size={20}/>}
                 >
                     GitHub
                 </Button>
-            </Group>
+            </Flex>
         </Container>
     </>
 }

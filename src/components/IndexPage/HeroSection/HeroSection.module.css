@@ -10,8 +10,8 @@
   padding-bottom: rem(100px);
 
   @media (max-width: $mantine-breakpoint-sm) {
-    padding-bottom: rem(80px);
-    padding-top: rem(80px);
+    padding-bottom: rem(32px);
+    padding-top: rem(32px);
   }
 }
 
@@ -42,26 +42,5 @@
 
   @media (max-width: $mantine-breakpoint-sm) {
     font-size: rem(16px);
-  }
-}
-
-.controls {
-  margin-top: calc(var(--mantine-spacing-xl) * 2);
-
-  @media (max-width: $mantine-breakpoint-sm) {
-    margin-top: var(--mantine-spacing-xl);
-  }
-}
-
-.control {
-  height: rem(48px);
-  padding-left: rem(38px);
-  padding-right: rem(38px);
-
-  @media (max-width: $mantine-breakpoint-sm) {
-    height: rem(54px);
-    padding-left: rem(18px);
-    padding-right: rem(18px);
-    flex: 1;
   }
 }
