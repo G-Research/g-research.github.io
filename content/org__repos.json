@@ -9695,7 +9695,7 @@
     "deployments_url": "https://api.github.com/repos/G-Research/fasttrackml/deployments",
     "created_at": "2023-03-30T15:46:08Z",
     "updated_at": "2024-06-06T10:26:41Z",
-    "pushed_at": "2024-06-06T10:27:46Z",
+    "pushed_at": "2024-06-06T18:18:50Z",
     "git_url": "git://github.com/G-Research/fasttrackml.git",
     "ssh_url": "git@github.com:G-Research/fasttrackml.git",
     "clone_url": "https://github.com/G-Research/fasttrackml.git",
@@ -9821,7 +9821,7 @@
     "deployments_url": "https://api.github.com/repos/G-Research/fasttrackml-ui-aim/deployments",
     "created_at": "2023-07-03T14:35:31Z",
     "updated_at": "2024-05-19T05:07:17Z",
-    "pushed_at": "2024-06-05T21:36:38Z",
+    "pushed_at": "2024-06-06T17:51:40Z",
     "git_url": "git://github.com/G-Research/fasttrackml-ui-aim.git",
     "ssh_url": "git@github.com:G-Research/fasttrackml-ui-aim.git",
     "clone_url": "https://github.com/G-Research/fasttrackml-ui-aim.git",
@@ -9841,7 +9841,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 3,
+    "open_issues_count": 4,
     "license": {
       "key": "apache-2.0",
       "name": "Apache License 2.0",
@@ -9855,7 +9855,7 @@
     "topics": [],
     "visibility": "public",
     "forks": 8,
-    "open_issues": 3,
+    "open_issues": 4,
     "watchers": 5,
     "default_branch": "main"
   },
@@ -10713,7 +10713,8 @@
     "forks": 15,
     "open_issues": 19,
     "watchers": 38,
-    "default_branch": "master"
+    "default_branch": "master",
+    "hosted_logo": "g-research/geras.svg"
   },
   {
     "id": 113976072,
@@ -18534,7 +18535,8 @@
     "forks": 63,
     "open_issues": 30,
     "watchers": 196,
-    "default_branch": "main"
+    "default_branch": "main",
+    "hosted_logo": "g-research/siembol.svg"
   },
   {
     "id": 370572070,
@@ -22194,7 +22196,7 @@
     "clone_url": "https://github.com/G-Research/yunikorn-history-server.git",
     "svn_url": "https://github.com/G-Research/yunikorn-history-server",
     "homepage": "",
-    "size": 118,
+    "size": 139,
     "stargazers_count": 2,
     "watchers_count": 2,
     "language": "Go",
