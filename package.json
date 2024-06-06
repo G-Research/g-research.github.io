@@ -9,8 +9,8 @@
     "oss"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
+    "develop": "gatsby develop --port 9000",
+    "start": "gatsby develop --port 9000",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
