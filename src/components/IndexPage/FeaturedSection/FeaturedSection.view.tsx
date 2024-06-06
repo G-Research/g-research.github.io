@@ -13,11 +13,8 @@ export default function ProjectsSectionView(): React.JSX.Element {
     return <>
         <Carousel
             mt="lg"
-            // height="100%"
-            // style={{flex: 1}}
             controlsOffset="lg"
             controlSize={40}
-            // withIndicators
             loop
             align="start"
             slideSize={{base: '100%', sm: '33.333333%'}}
