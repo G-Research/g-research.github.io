@@ -112,7 +112,10 @@ export default function ProjectsSectionView(): React.JSX.Element {
                         />
                     </Grid.Col>
                 </Grid>
-                <SimpleGrid cols={2} spacing="lg" verticalSpacing="lg" mt="lg">
+                <SimpleGrid cols={{
+                    base: 1,
+                    sm: 2,
+                }} spacing="lg" verticalSpacing="lg" mt="lg">
                     {repos.map((repo) => <ProjectCard repo={repo}/>)}
                 </SimpleGrid>
             </Grid.Col>
