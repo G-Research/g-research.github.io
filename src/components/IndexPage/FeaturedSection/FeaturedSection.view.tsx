@@ -7,7 +7,7 @@ import {ProjectCard} from '@components/Project';
 
 export default function ProjectsSectionView(): React.JSX.Element {
     const [repos] = useState(() => {
-        return REPOS.toSorted((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 5);
+        return REPOS.toSorted((a, b) => b.stargazers_count - a.stargazers_count).filter((repo) => repo.featured);
     });
 
     return <>

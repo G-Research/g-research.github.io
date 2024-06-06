@@ -2318,6 +2318,8 @@
     "node_id": "MDEwOlJlcG9zaXRvcnkxNDIzMjg0MTA=",
     "name": "ParquetSharp",
     "full_name": "G-Research/ParquetSharp",
+    "hosted_logo": "g-research/parquetsharp.svg",
+    "featured": true,
     "private": false,
     "owner": {
       "login": "G-Research",
@@ -7207,6 +7209,7 @@
     "name": "consuldotnet",
     "full_name": "G-Research/consuldotnet",
     "hosted_logo": "g-research/consuldotnet.svg",
+    "featured": true,
     "private": false,
     "owner": {
       "login": "G-Research",
@@ -9629,6 +9632,7 @@
     "node_id": "R_kgDOJQnuhg",
     "name": "fasttrackml",
     "full_name": "G-Research/fasttrackml",
+    "featured": true,
     "private": false,
     "owner": {
       "login": "G-Research",
@@ -22227,6 +22231,7 @@
     "node_id": "MDEwOlJlcG9zaXRvcnkxOTI3Njg3MTM=",
     "name": "armada",
     "full_name": "armadaproject/armada",
+    "featured": true,
     "private": false,
     "owner": {
       "login": "armadaproject",
@@ -22336,6 +22341,7 @@
     "node_id": "MDEwOlJlcG9zaXRvcnk3ODM1NjgxMA==",
     "name": "ILGPU",
     "full_name": "m4rs-mt/ILGPU",
+    "featured": true,
     "private": false,
     "owner": {
       "login": "m4rs-mt",

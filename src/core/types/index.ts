@@ -54,4 +54,5 @@ export type Project = {
     watchers: number,
     default_branch: string,
     hosted_logo?: string,
+    featured?: boolean,
 }
