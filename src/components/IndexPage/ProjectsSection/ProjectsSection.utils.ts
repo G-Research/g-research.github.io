@@ -21,13 +21,13 @@ export function filter_projects(
     }
     // sort by
     if (sortBy === "Stars") {
-        results = results.sort((a, b) => b.stargazers_count - a.stargazers_count);
+        results = results.toSorted((a, b) => b.stargazers_count - a.stargazers_count);
     }
     if (sortBy === "Last Updated") {
-        results = results.sort((a, b) => getTime(b.updated_at) - getTime(a.updated_at));
+        results = results.toSorted((a, b) => getTime(b.updated_at) - getTime(a.updated_at));
     }
     if (sortBy === "Name") {
-        results = results.sort((a, b) => a.name.localeCompare(b.name));
+        results = results.toSorted((a, b) => a.name.localeCompare(b.name));
     }
     // isArchived && isActive
     results = results.filter((project) => (isArchived ? (project.archived || isActive) : (!project.archived && isActive)));
