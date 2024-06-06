@@ -53,4 +53,5 @@ export type Project = {
     open_issues: number,
     watchers: number,
     default_branch: string,
+    hosted_logo?: string,
 }

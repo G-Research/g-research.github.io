@@ -1,4 +1,5 @@
 import * as React from "react"
+import {withPrefix} from 'gatsby'
 import {
     Text,
     Group,
@@ -28,7 +29,7 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                 }}
             />
             <Avatar
-                src={repo.owner.avatar_url}
+                src={repo.hosted_logo ? withPrefix(`/hosted_logos/${repo.hosted_logo}`) : repo.owner.avatar_url}
                 size={80}
                 mx="auto"
                 mt={-40}
