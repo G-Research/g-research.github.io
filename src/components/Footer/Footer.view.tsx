@@ -62,7 +62,7 @@ export default function FooterView({links, socials, joinUsUrl, description, gene
                                     target="_blank" rel="noopener noreferrer"
                                     href={joinUsUrl}
                                     variant="light"
-                                    size="sm">
+                                    size="md">
                                 JOIN US
                             </Button>
                         }

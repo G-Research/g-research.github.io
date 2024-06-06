@@ -41,13 +41,13 @@ export default function ProjectsSectionView(): React.JSX.Element {
                         <Fieldset legend="Status">
                             <Stack gap="sm" align="stretch" justify="center">
                                 <Checkbox
-                                    size="sm"
+                                    size="md"
                                     checked={isActive}
                                     onChange={(event) => setIsActive(event.currentTarget.checked)}
                                     label="Active"
                                 />
                                 <Checkbox
-                                    size="sm"
+                                    size="md"
                                     checked={isArchived}
                                     onChange={(event) => setIsArchived(event.currentTarget.checked)}
                                     label="Archived"
@@ -56,7 +56,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
                         </Fieldset>
 
                         <MultiSelect
-                            size="sm"
+                            size="md"
                             label="Languages"
                             placeholder="Languages"
                             data={LANGUAGE_OPTIONS}
@@ -69,7 +69,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
                         />
 
                         <MultiSelect
-                            size="sm"
+                            size="md"
                             label="Topics"
                             placeholder="Topics"
                             data={TOPIC_OPTIONS}
@@ -90,8 +90,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
                 <Grid gutter="xs" justify="stretch" align="flex-end">
                     <Grid.Col span={8}>
                         <TextInput
-                            size="sm"
-                            radius="sm"
+                            size="md"
                             label="Search"
                             placeholder="Find a project..."
                             leftSection={<IconSearch style={{width: rem(16), height: rem(16)}} stroke={1.5}/>}
@@ -102,7 +101,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
 
                     <Grid.Col span='auto'>
                         <Select
-                            size="sm"
+                            size="md"
                             label="Sort by"
                             placeholder="Sort by"
                             data={SORT_BY_OPTIONS}
