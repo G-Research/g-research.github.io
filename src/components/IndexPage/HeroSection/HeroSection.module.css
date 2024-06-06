@@ -31,6 +31,10 @@
   }
 }
 
+.brand {
+  white-space: nowrap;
+}
+
 .description {
   margin-top: var(--mantine-spacing-xl);
   font-size: rem(20px);

@@ -8,7 +8,8 @@ export default function HeroSectionView(): React.JSX.Element {
         <Container size='xl' className={classes.inner}>
             <h1 className={classes.title}>
                 Open-Source Software at{' '}
-                <Text component="span" variant="gradient" gradient={{from: 'blue', to: 'cyan'}} inherit>
+                <Text component="span" variant="gradient" gradient={{from: 'blue', to: 'cyan'}} inherit
+                      className={classes.brand}>
                     G-Research
                 </Text>
             </h1>
