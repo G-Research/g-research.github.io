@@ -23,13 +23,14 @@ export default function ProjectsSectionView(): React.JSX.Element {
     const [topics, setTopics] = useState<string[]>([]);
     const [isActive, setIsActive] = useState<boolean>(true);
     const [isArchived, setIsArchived] = useState<boolean>(false);
+    const [isFork, setIsFork] = useState<boolean>(false);
     const [search, setSearch] = useState<string>("");
     const [sortBy, setSortBy] = useState<string | null>(SORT_BY_OPTIONS[2]);
-    const [repos, setRepos] = useState(() => filter_projects(REPOS, search, sortBy, isArchived, isActive, topics, languages));
+    const [repos, setRepos] = useState(() => filter_projects(REPOS, search, sortBy, isActive, isArchived, isFork, languages, topics));
 
     useEffect(() => {
-        setRepos(filter_projects(REPOS, search, sortBy, isArchived, isActive, topics, languages));
-    }, [search, sortBy, isArchived, isActive, topics, languages]);
+        setRepos(filter_projects(REPOS, search, sortBy, isActive, isArchived, isFork, languages, topics));
+    }, [search, sortBy, isActive, isArchived, isFork, languages, topics]);
 
     return <>
         <Grid>
@@ -52,6 +53,12 @@ export default function ProjectsSectionView(): React.JSX.Element {
                                     checked={isArchived}
                                     onChange={(event) => setIsArchived(event.currentTarget.checked)}
                                     label="Archived"
+                                />
+                                <Checkbox
+                                    size="md"
+                                    checked={isFork}
+                                    onChange={(event) => setIsFork(event.currentTarget.checked)}
+                                    label="Forks"
                                 />
                             </Stack>
                         </Fieldset>

@@ -10,10 +10,11 @@ export function filter_projects(
     projects: Project[],
     search: string,
     sortBy: string | null,
-    isArchived: boolean,
     isActive: boolean,
-    topics: string[],
+    isArchived: boolean,
+    isFork: boolean,
     languages: string[],
+    topics: string[],
 ): Project[] {
     let results = projects;
     if (search) { // filter by full_name
@@ -30,11 +31,16 @@ export function filter_projects(
         results = results.toSorted((a, b) => a.name.localeCompare(b.name));
     }
     // isArchived && isActive
-    results = results.filter((project) => (isArchived ? (project.archived || isActive) : (!project.archived && isActive)));
-    // topics includes any of the selected topics
-    results = results.filter((project) => !topics?.length || project.topics.some((topic) => topics.includes(topic)));
+    results = results.filter((project) => {
+        const projectIsActive = !project.private && !project.disabled && !project.archived && !project.fork;
+        const projectIsArchived = project.archived;
+        const projectIsFork = project.fork;
+        return (isActive && projectIsActive) || (isArchived && projectIsArchived) || (isFork && projectIsFork);
+    });
     // language is any of the selected languages
     results = results.filter((project) => !languages?.length || languages.includes(project.language));
+    // topics includes any of the selected topics
+    results = results.filter((project) => !topics?.length || project.topics.some((topic) => topics.includes(topic)));
     // return results
     return results;
 }
