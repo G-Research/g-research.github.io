@@ -8,6 +8,7 @@ import {
     Select,
     Checkbox,
     TextInput,
+    Text,
     rem,
     SimpleGrid,
 } from '@mantine/core'
@@ -111,6 +112,9 @@ export default function ProjectsSectionView(): React.JSX.Element {
                         />
                     </Grid.Col>
                 </Grid>
+                <Text ta="left" fz="sm" c="dimmed" mt="xs">
+                    {repos.length} project{repos.length !== 1 ? 's' : ''} found
+                </Text>
                 <SimpleGrid cols={{
                     base: 1,
                     sm: 2,
