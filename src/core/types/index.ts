@@ -55,4 +55,6 @@ export type Project = {
     default_branch: string,
     hosted_logo?: string,
     featured?: boolean,
+    discord_url?: string,
+    slack_url?: string,
 }

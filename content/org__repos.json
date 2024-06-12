@@ -9751,7 +9751,8 @@
     "watchers": 96,
     "default_branch": "main",
     "hosted_logo": "g-research/fasttrackml.svg",
-    "featured": true
+    "featured": true,
+    "slack_url": "https://mlops-community.slack.com/archives/C05ALNZ1XJN"
   },
   {
     "id": 661740366,
@@ -22463,6 +22464,7 @@
     "open_issues": 33,
     "watchers": 1280,
     "default_branch": "master",
-    "featured": true
+    "featured": true,
+    "discord_url": "https://discord.gg/X6RBCff"
   }
 ]

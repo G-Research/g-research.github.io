@@ -10,7 +10,7 @@ import {
     ActionIcon,
     rem
 } from '@mantine/core'
-import {IconBrandGithub, IconWorld} from '@tabler/icons-react'
+import {IconBrandGithub, IconWorld, IconBrandSlack, IconBrandDiscord} from '@tabler/icons-react'
 import type {Project} from "@core/types";
 
 
@@ -70,6 +70,30 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                 </Stack>
             </Group>
             <Group justify="flex-end" gap="sm" mt="xl">
+                {repo.slack_url && (
+                    <ActionIcon variant="default" size="xl"
+                                component="a"
+                                href={repo.slack_url}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                }}
+                                target="_blank" rel="noopener noreferrer"
+                    >
+                        <IconBrandSlack style={{width: rem(20)}} stroke={1.5}/>
+                    </ActionIcon>
+                )}
+                {repo.discord_url && (
+                    <ActionIcon variant="default" size="xl"
+                                component="a"
+                                href={repo.discord_url}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                }}
+                                target="_blank" rel="noopener noreferrer"
+                    >
+                        <IconBrandDiscord style={{width: rem(20)}} stroke={1.5}/>
+                    </ActionIcon>
+                )}
                 {repo.homepage && (
                     <ActionIcon variant="default" size="xl"
                                 component="a"
