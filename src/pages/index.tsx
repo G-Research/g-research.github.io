@@ -36,15 +36,18 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
     const socials = [
         {
             Icon: IconBrandGithub,
-            link: data.site.siteMetadata.githubUrl
+            link: data.site.siteMetadata.githubUrl,
+            label: 'GitHub'
         },
         {
             Icon: IconBrandX,
-            link: data.site.siteMetadata.xUrl
+            link: data.site.siteMetadata.xUrl,
+            label: 'X (fka Twitter)'
         },
         {
             Icon: IconBrandYoutube,
-            link: data.site.siteMetadata.youtubeUrl
+            link: data.site.siteMetadata.youtubeUrl,
+            label: 'YouTube'
         }
     ];
     return (
@@ -72,7 +75,6 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
             <Footer
                 joinUsUrl={joinUsUrl}
                 description={description}
-                generatedAt={generatedAt}
                 links={links}
                 socials={socials}
             />

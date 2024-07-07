@@ -15,16 +15,16 @@ import * as classes from './Header.module.css';
 
 
 type Props = {
-    title: string;
+    description: string;
     socials: {
         Icon: React.ForwardRefExoticComponent<Omit<IconProps, "ref"> & React.RefAttributes<Icon>>;
-        link: string;
         label: string;
+        link: string;
     }[];
 }
 
 
-export default function HeaderView({title, socials}: Props): React.JSX.Element {
+export default function HeaderView({description, socials}: Props): React.JSX.Element {
     return <Box component="header" className={classes.header}>
         <Container fluid mx="xl" px="xl" py={{
             base: 0,
@@ -34,7 +34,7 @@ export default function HeaderView({title, socials}: Props): React.JSX.Element {
                 <Grid.Col span={4} visibleFrom="xs">
                     <Group justify="flex-start">
                         <Text c="gray" size="sm" tt="uppercase">
-                            {title}
+                            {description}
                         </Text>
                     </Group>
                 </Grid.Col>

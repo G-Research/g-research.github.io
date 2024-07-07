@@ -6,25 +6,24 @@ import {
     IconProps
 } from '@tabler/icons-react';
 import Logo from '@components/Logo';
-import {dayjs} from '@core/dates';
 import * as classes from './Footer.module.css';
 
 
 type Props = {
+    joinUsUrl?: string;
+    description: string;
     links: {
         label: string;
         link: string;
     }[];
     socials: {
         Icon: React.ForwardRefExoticComponent<Omit<IconProps, "ref"> & React.RefAttributes<Icon>>;
+        label: string;
         link: string;
     }[];
-    joinUsUrl?: string;
-    description: string;
-    generatedAt: Date;
 }
 
-export default function FooterView({links, socials, joinUsUrl, description, generatedAt}: Props): React.JSX.Element {
+export default function FooterView({joinUsUrl, description, links, socials}: Props): React.JSX.Element {
     return <Box component="footer" className={classes.footer}>
         <Container py="xl">
             <Grid justify="stretch" align="center">
@@ -36,11 +35,11 @@ export default function FooterView({links, socials, joinUsUrl, description, gene
                         <Logo alt="G-Research"
                               src="https://github.com/G-Research/brand/raw/main/logo/GR/logo.svg"
                               height={96}/>
-                        <Text size="xs" c="gray" p={0}>
-                            CREATE TODAY.
+                        <Text size="xs" c="gray" p={0} tt="uppercase">
+                            Create today.
                         </Text>
-                        <Text size="xs" c="gray" p={0}>
-                            PREDICT TOMORROW.
+                        <Text size="xs" c="gray" p={0} tt="uppercase">
+                            Predict tomorrow.
                         </Text>
                     </Stack>
                 </Grid.Col>
@@ -75,11 +74,9 @@ export default function FooterView({links, socials, joinUsUrl, description, gene
                   align={{base: "center", sm: "space-between"}}
                   direction={{base: 'column', sm: 'row'}}
                   gap={{base: 'md', sm: 'lg'}}>
-                <Tooltip label={`Generated at ${dayjs(generatedAt).format("lll")}`}>
-                    <Text c="gray" size="sm">
-                        {description}
-                    </Text>
-                </Tooltip>
+                <Text c="gray" size="sm">
+                    {description}
+                </Text>
                 <Group gap="md">
                     {links?.filter(v => v?.link).map((v, ind) => (
                         <Anchor
@@ -96,15 +93,17 @@ export default function FooterView({links, socials, joinUsUrl, description, gene
                 </Group>
                 <Group gap={4}>
                     {socials?.filter(v => v?.link).map((v, ind) => (
-                        <ActionIcon
-                            size="lg"
-                            color="gray" variant="subtle"
-                            component="a"
-                            href={v.link}
-                            target="_blank" rel="noopener noreferrer"
-                            key={ind}>
-                            <v.Icon style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
-                        </ActionIcon>
+                        <Tooltip label={v.label}>
+                            <ActionIcon
+                                size="lg"
+                                color="gray" variant="subtle"
+                                component="a"
+                                href={v.link}
+                                target="_blank" rel="noopener noreferrer"
+                                key={ind}>
+                                <v.Icon style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                            </ActionIcon>
+                        </Tooltip>
                     ))}
                 </Group>
             </Flex>
