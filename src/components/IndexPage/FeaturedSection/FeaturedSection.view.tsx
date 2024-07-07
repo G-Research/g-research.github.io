@@ -1,15 +1,15 @@
 import * as React from "react"
-import {useState} from 'react'
 import {Carousel} from "@mantine/carousel";
-import {REPOS} from "@core/mock_data";
 import {ProjectCard} from '@components/Project';
+import type {Repository} from "@core/types";
 
 
-export default function ProjectsSectionView(): React.JSX.Element {
-    const [repos] = useState(() => {
-        return REPOS.toSorted((a, b) => b.stargazers_count - a.stargazers_count).filter((repo) => repo.featured);
-    });
+type Props = {
+    repos: Repository[];
+}
 
+
+export default function FeaturedSectionView({repos}: Props): React.JSX.Element {
     return <>
         <Carousel
             mt="lg"
@@ -21,7 +21,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
             slideGap={{base: 0, sm: 'lg'}}
             slidesToScroll={1}
         >
-            {repos.map((repo) => <Carousel.Slide><ProjectCard repo={repo}/></Carousel.Slide>)}
+            {repos.map((repo, ind) => <Carousel.Slide key={ind}><ProjectCard repo={repo}/></Carousel.Slide>)}
         </Carousel>
     </>
 }
