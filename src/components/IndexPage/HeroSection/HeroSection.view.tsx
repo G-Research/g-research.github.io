@@ -3,7 +3,12 @@ import * as React from "react"
 import {IconBrandGithub, IconChevronsDown} from '@tabler/icons-react'
 import * as classes from './HeroSection.module.css'
 
-export default function HeroSectionView(): React.JSX.Element {
+type Props = {
+    onExploreProjectsClick: () => void;
+}
+
+
+export default function HeroSectionView({onExploreProjectsClick}: Props): React.JSX.Element {
     return <>
         <Container size='xl' className={classes.inner}>
             <h1 className={classes.title}>
@@ -29,12 +34,11 @@ export default function HeroSectionView(): React.JSX.Element {
                   gap={{base: 'md', sm: 'lg'}}
             >
                 <Button
-                    component='a'
-                    href='#all-projects'
                     size="lg"
                     variant="gradient"
                     gradient={{from: 'blue', to: 'cyan'}}
                     leftSection={<IconChevronsDown size={20}/>}
+                    onClick={onExploreProjectsClick}
                 >
                     Explore our projects
                 </Button>

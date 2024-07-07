@@ -3,6 +3,7 @@ import type {PageProps, HeadProps} from "gatsby"
 import type {DataProps} from "@core/types"
 import {graphql} from 'gatsby'
 import {Container, Divider, Title, rem} from '@mantine/core'
+import {useScrollIntoView} from '@mantine/hooks'
 import {
     IconBrandX,
     IconBrandYoutube,
@@ -50,25 +51,28 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
             label: 'YouTube'
         }
     ];
+    const {scrollIntoView: scrollIntoProjectsSection, targetRef: projectsSectionRef}
+        = useScrollIntoView<HTMLDivElement>({offset: 8});
+
     return (
         <>
-            <Header description={description} socials={socials}/>
-            <HeroSection/>
+            <Header description="Create today. Predict tomorrow." socials={socials}/>
+            <HeroSection onExploreProjectsClick={() =>
+                scrollIntoProjectsSection({
+                    alignment: 'start',
+                })}/>
             <Container component="main" pb="xl" size="xl" mb='xl'>
                 <Divider
                     labelPosition="center"
-                    label={
-                        <Title id='featured-projects' size="h2" py="lg" ta="center" c="blue">FEATURED PROJECTS</Title>
-                    }
+                    label={<Title size="h2" py="lg" ta="center" c="blue">FEATURED PROJECTS</Title>}
                 />
                 <FeaturedSection/>
                 <Divider
                     mt={{base: rem(32), sm: rem(96)}}
                     mb={rem(32)}
                     labelPosition="center"
-                    label={
-                        <Title id='all-projects' size="h2" py="lg" ta="center" c="blue">ALL PROJECTS</Title>
-                    }
+                    label={<Title size="h2" py="lg" ta="center" c="blue">ALL PROJECTS</Title>}
+                    ref={projectsSectionRef}
                 />
                 <ProjectsSection/>
             </Container>
