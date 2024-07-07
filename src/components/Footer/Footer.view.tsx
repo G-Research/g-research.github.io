@@ -93,14 +93,13 @@ export default function FooterView({joinUsUrl, description, links, socials}: Pro
                 </Group>
                 <Group gap={4}>
                     {socials?.filter(v => v?.link).map((v, ind) => (
-                        <Tooltip label={v.label}>
+                        <Tooltip label={v.label} key={ind}>
                             <ActionIcon
                                 size="lg"
                                 color="gray" variant="subtle"
                                 component="a"
                                 href={v.link}
-                                target="_blank" rel="noopener noreferrer"
-                                key={ind}>
+                                target="_blank" rel="noopener noreferrer">
                                 <v.Icon style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                             </ActionIcon>
                         </Tooltip>

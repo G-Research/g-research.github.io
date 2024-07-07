@@ -51,14 +51,13 @@ export default function HeaderView({description, socials}: Props): React.JSX.Ele
                 <Grid.Col span={4} visibleFrom="xs">
                     <Group gap={4} justify="flex-end">
                         {socials?.filter(v => v?.link).map((v, ind) => (
-                            <Tooltip label={v.label}>
+                            <Tooltip label={v.label} key={ind}>
                                 <ActionIcon
                                     size="xl"
                                     color="gray" variant="subtle"
                                     component="a"
                                     href={v.link}
-                                    target="_blank" rel="noopener noreferrer"
-                                    key={ind}>
+                                    target="_blank" rel="noopener noreferrer">
                                     <v.Icon size={20}/>
                                 </ActionIcon>
                             </Tooltip>
