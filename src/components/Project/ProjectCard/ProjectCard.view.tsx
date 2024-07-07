@@ -71,52 +71,60 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
             </Group>
             <Group justify="flex-end" gap="sm" mt="xl">
                 {repo.slack_url && (
-                    <ActionIcon variant="default" size="xl"
-                                component="a"
-                                href={repo.slack_url}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                }}
-                                target="_blank" rel="noopener noreferrer"
-                    >
-                        <IconBrandSlack style={{width: rem(20)}} stroke={1.5}/>
-                    </ActionIcon>
+                    <Tooltip label="Slack">
+                        <ActionIcon variant="default" size="xl"
+                                    component="a"
+                                    href={repo.slack_url.toString()}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    target="_blank" rel="noopener noreferrer"
+                        >
+                            <IconBrandSlack style={{width: rem(20)}} stroke={1.5}/>
+                        </ActionIcon>
+                    </Tooltip>
                 )}
                 {repo.discord_url && (
-                    <ActionIcon variant="default" size="xl"
-                                component="a"
-                                href={repo.discord_url}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                }}
-                                target="_blank" rel="noopener noreferrer"
-                    >
-                        <IconBrandDiscord style={{width: rem(20)}} stroke={1.5}/>
-                    </ActionIcon>
+                    <Tooltip label="Discord">
+                        <ActionIcon variant="default" size="xl"
+                                    component="a"
+                                    href={repo.discord_url.toString()}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    target="_blank" rel="noopener noreferrer"
+                        >
+                            <IconBrandDiscord style={{width: rem(20)}} stroke={1.5}/>
+                        </ActionIcon>
+                    </Tooltip>
                 )}
-                {repo.homepage && (
-                    <ActionIcon variant="default" size="xl"
-                                component="a"
-                                href={repo.homepage}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                }}
-                                target="_blank" rel="noopener noreferrer"
-                    >
-                        <IconWorld style={{width: rem(20)}} stroke={1.5}/>
-                    </ActionIcon>
+                {repo.website_url && (
+                    <Tooltip label="Website">
+                        <ActionIcon variant="default" size="xl"
+                                    component="a"
+                                    href={repo.website_url.toString()}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    target="_blank" rel="noopener noreferrer"
+                        >
+                            <IconWorld style={{width: rem(20)}} stroke={1.5}/>
+                        </ActionIcon>
+                    </Tooltip>
                 )}
-                {repo.html_url && (
-                    <ActionIcon variant="default" size="xl"
-                                component="a"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                }}
-                                href={repo.html_url}
-                                target="_blank" rel="noopener noreferrer"
-                    >
-                        <IconBrandGithub style={{width: rem(20)}} stroke={1.5}/>
-                    </ActionIcon>
+                {repo.url && (
+                    <Tooltip label="GitHub">
+                        <ActionIcon variant="default" size="xl"
+                                    component="a"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    href={repo.url.toString()}
+                                    target="_blank" rel="noopener noreferrer"
+                        >
+                            <IconBrandGithub style={{width: rem(20)}} stroke={1.5}/>
+                        </ActionIcon>
+                    </Tooltip>
                 )}
             </Group>
         </Card>
