@@ -18,8 +18,6 @@ export type DataProps = {
             careersUrl: string,
             // featured projects
             featured: string[],
-            // override project metadata
-            custom_values: Record<string, Record<string, string | number | boolean | null>>,
         }
     }
 }
