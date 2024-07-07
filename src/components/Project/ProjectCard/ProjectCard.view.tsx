@@ -6,20 +6,30 @@ import {
     Card,
     Avatar,
     Stack,
+    SimpleGrid,
     NumberFormatter,
     ActionIcon,
-    rem
+    rem,
+    Tooltip,
 } from '@mantine/core'
-import {IconBrandGithub, IconWorld, IconBrandSlack, IconBrandDiscord} from '@tabler/icons-react'
-import type {Project} from "@core/types";
+import {
+    IconBrandGithub,
+    IconWorld,
+    IconBrandSlack,
+    IconBrandDiscord,
+    IconGitFork,
+    IconArchive,
+} from '@tabler/icons-react'
+import type {Repository} from "@core/types";
 
 
 type Props = {
-    repo: Project;
+    repo: Repository;
 }
 
 
 export default function ProjectCardView({repo}: Props): React.JSX.Element {
+    const avatar_url: string = (repo.avatar_url || repo.owner_avatar_url) as string;
     return <>
         <Card withBorder padding="xl" radius="md">
             <Card.Section
@@ -29,14 +39,20 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                 }}
             />
             <Avatar
-                src={repo.hosted_logo ? withPrefix(`/hosted_logos/${repo.hosted_logo}`) : repo.owner.avatar_url}
+                src={avatar_url.startsWith("/") ? withPrefix(`${avatar_url}`) : avatar_url}
                 size={80}
                 mx="auto"
                 mt={-40}
             />
-            <Text ta="center" size="lg" fw={700} mt="sm" tt="uppercase">
-                {repo.name}
-            </Text>
+            <Group gap={2} justify="center" mt="sm">
+                <Text ta="center" size="lg" fw={700} tt="uppercase">
+                    {repo.name}
+                </Text>
+                {repo.archived &&
+                    <Tooltip label="This repository has been archived"><IconArchive color='orange'/></Tooltip>}
+                {repo.fork && !repo.archived &&
+                    <Tooltip label="This is a forked repository"><IconGitFork color='grey'/></Tooltip>}
+            </Group>
             <Text ta="center" size="xs" tt="uppercase">
                 {repo.owner_name}
             </Text>
