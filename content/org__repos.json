@@ -22338,7 +22338,8 @@
     "open_issues": 92,
     "watchers": 428,
     "default_branch": "master",
-    "featured": true
+    "featured": true,
+    "slack_url": "https://cloud-native.slack.com/?redir=%2Farchives%2FC03T9CBCEMC"
   },
   {
     "id": 78356810,
