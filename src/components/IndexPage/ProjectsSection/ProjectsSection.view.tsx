@@ -11,25 +11,36 @@ import {
     Text,
     rem,
     SimpleGrid,
+    Tooltip,
 } from '@mantine/core'
 import {IconSearch} from '@tabler/icons-react'
-import {REPOS, TOPIC_OPTIONS, LANGUAGE_OPTIONS, SORT_BY_OPTIONS} from "@core/mock_data";
+import type {Repository} from "@core/types";
 import {ProjectCard} from '@components/Project';
-import {filter_projects} from './ProjectsSection.utils';
+import {dayjs} from '@core/dates';
+import {filter_repositories} from '@core/data';
 
 
-export default function ProjectsSectionView(): React.JSX.Element {
+type Props = {
+    generated_at: Date;
+    all_repos: Repository[];
+    language_options: string[];
+    topic_options: string[];
+    sort_by_options: string[];
+}
+
+export default function ProjectsSectionView(
+    {generated_at, all_repos, language_options, topic_options, sort_by_options}: Props): React.JSX.Element {
     const [languages, setLanguages] = useState<string[]>([]);
     const [topics, setTopics] = useState<string[]>([]);
     const [isActive, setIsActive] = useState<boolean>(true);
     const [isArchived, setIsArchived] = useState<boolean>(false);
     const [isFork, setIsFork] = useState<boolean>(false);
     const [search, setSearch] = useState<string>("");
-    const [sortBy, setSortBy] = useState<string | null>(SORT_BY_OPTIONS[2]);
-    const [repos, setRepos] = useState(() => filter_projects(REPOS, search, sortBy, isActive, isArchived, isFork, languages, topics));
+    const [sortBy, setSortBy] = useState<string | null>(sort_by_options[sort_by_options.length - 1]);
+    const [repos, setRepos] = useState(() => filter_repositories(all_repos, search, sortBy, isActive, isArchived, isFork, languages, topics));
 
     useEffect(() => {
-        setRepos(filter_projects(REPOS, search, sortBy, isActive, isArchived, isFork, languages, topics));
+        setRepos(filter_repositories(all_repos, search, sortBy, isActive, isArchived, isFork, languages, topics));
     }, [search, sortBy, isActive, isArchived, isFork, languages, topics]);
 
     return <>
@@ -67,7 +78,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
                             size="md"
                             label="Languages"
                             placeholder="Languages"
-                            data={LANGUAGE_OPTIONS}
+                            data={language_options}
                             value={languages}
                             onChange={setLanguages}
                             clearable
@@ -80,7 +91,7 @@ export default function ProjectsSectionView(): React.JSX.Element {
                             size="md"
                             label="Topics"
                             placeholder="Topics"
-                            data={TOPIC_OPTIONS}
+                            data={topic_options}
                             value={topics}
                             onChange={setTopics}
                             clearable
@@ -112,21 +123,24 @@ export default function ProjectsSectionView(): React.JSX.Element {
                             size="md"
                             label="Sort by"
                             placeholder="Sort by"
-                            data={SORT_BY_OPTIONS}
+                            data={sort_by_options}
                             allowDeselect={false}
                             value={sortBy}
                             onChange={setSortBy}
                         />
                     </Grid.Col>
                 </Grid>
-                <Text ta="left" fz="sm" c="dimmed" mt="xs">
-                    {repos.length} project{repos.length !== 1 ? 's' : ''} found
-                </Text>
+                <Tooltip position="bottom-start"
+                         label={`Data collected ${dayjs(generated_at).fromNow()} (${dayjs(generated_at).format("lll")})`}>
+                    <Text ta="left" fz="sm" c="dimmed" mt="xs">
+                        {repos.length} project{repos.length !== 1 ? 's' : ''} found
+                    </Text>
+                </Tooltip>
                 <SimpleGrid cols={{
                     base: 1,
                     sm: 2,
                 }} spacing="lg" verticalSpacing="lg" mt="lg">
-                    {repos.map((repo) => <ProjectCard repo={repo}/>)}
+                    {repos.map((repo, ind) => <ProjectCard repo={repo} key={ind}/>)}
                 </SimpleGrid>
             </Grid.Col>
         </Grid>
