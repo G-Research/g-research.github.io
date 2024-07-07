@@ -9,7 +9,7 @@ import datetime as dt
 import re
 import json
 from pathlib import Path
-from github import Repository as GhRepository, Github, Auth
+from github import Repository as GhRepository, Github, Auth, UnknownObjectException
 import fire
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
@@ -79,9 +79,12 @@ def should_be_included(repo_id: str, owner_id: str, include: set[str], exclude: 
 
 
 def get_readme_text(gh_repo: GhRepository) -> t.Optional[str]:
-    readme = gh_repo.get_readme()
-    if readme:
-        return readme.decoded_content.decode()
+    try:
+        readme = gh_repo.get_readme()
+        if readme:
+            return readme.decoded_content.decode()
+    except UnknownObjectException as e:
+        logger.warning(f"no readme found for '{gh_repo.full_name}': {e}")
 
 
 def extract_url(text: str, subs: list[str]) -> t.Optional[str]:
