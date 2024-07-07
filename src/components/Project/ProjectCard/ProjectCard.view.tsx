@@ -38,12 +38,12 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                 {repo.name}
             </Text>
             <Text ta="center" size="xs" tt="uppercase">
-                {repo.owner.login}
+                {repo.owner_name}
             </Text>
             <Text mt="xs" c="dimmed" size="sm" lineClamp={2}>
                 {repo.description}
             </Text>
-            <Group mt="md" justify="space-evenly">
+            <SimpleGrid cols={3} spacing={0} verticalSpacing={0} mt="md">
                 <Stack>
                     <Text ta="center" fz="lg">
                         <NumberFormatter value={repo.stargazers_count} thousandSeparator/>
@@ -68,7 +68,7 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                         Open Issues
                     </Text>
                 </Stack>
-            </Group>
+            </SimpleGrid>
             <Group justify="flex-end" gap="sm" mt="xl">
                 {repo.slack_url && (
                     <Tooltip label="Slack">
