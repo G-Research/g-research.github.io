@@ -1,60 +1,72 @@
 export type DataProps = {
     site: {
         siteMetadata: {
+            // metadata
             title: string,
             description: string,
-            websiteUrl: string,
-            blogUrl: string,
-            careersUrl: string,
+            siteUrl: string,
+            repositoryUrl: string,
+            generatedAt: Date,
+            // social links
             githubUrl: string,
             xUrl: string,
             youtubeUrl: string,
+            // footer links
             joinUsUrl: string,
-            generatedAt: Date,
+            websiteUrl: string,
+            blogUrl: string,
+            careersUrl: string,
+            // featured projects
+            featured: string[],
+            // override project metadata
+            custom_values: Record<string, Record<string, string | number | boolean | null>>,
         }
     }
 }
 
 
-export type Project = {
+export type Repository = {
+    // info
+    id: string,  // full_name lowercase
     name: string,
     full_name: string,
-    private: boolean,
-    owner: {
-        login: string,
-        avatar_url: string,
-        html_url: string,
-    },
-    html_url: string,
-    description: string,
-    fork: boolean,
-    created_at: Date,
-    updated_at: Date,
-    pushed_at: Date,
-    homepage: string,
-    size: number,
+    avatar_url?: string | URL,  // hosted_logo
+    description?: string,
+    topics: string[],
+    // owner
+    owner_id: string,  // username lowercase
+    owner_name: string,  // username
+    owner_avatar_url: URL,
+    owner_url: URL,
+    // stats
     stargazers_count: number,
-    watchers_count: number,
     forks_count: number,
-    language: string,
-    mirror_url?: string,
+    open_issues_count: number,
+    watchers_count: number,
+    size: number,
+    // urls
+    url: URL,
+    website_url?: URL,
+    discord_url?: URL,
+    slack_url?: URL,
+    // timestamps
+    created_at?: string | Date,  // iso datetime example: 2011-01-26T19:14:43Z
+    updated_at?: string | Date,  // iso datetime
+    pushed_at?: string | Date,  // iso datetime
+    // flags
+    private: boolean,
+    fork: boolean,
     archived: boolean,
     disabled: boolean,
-    open_issues_count: number,
-    license: {
-        key: string,
-        name: string,
-    },
     allow_forking: boolean,
     is_template: boolean,
-    topics: string[],
-    visibility: string,
-    forks: number,
-    open_issues: number,
-    watchers: number,
+    // languages
+    main_language?: string,
+    languages: Record<string, number>,
+    // license
+    license_key?: string,
+    license_name?: string,
+    // other
     default_branch: string,
-    hosted_logo?: string,
-    featured?: boolean,
-    discord_url?: string,
-    slack_url?: string,
+    visibility?: "public" | "private" | "internal",
 }
