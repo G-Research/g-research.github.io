@@ -23,6 +23,7 @@ export default function HeroSectionView({onExploreProjectsClick}: Props): React.
                 We play an active role in the open-source community. We take responsibility for maintaining projects,
                 contributing to the continual development of essential software and supporting open-source foundations.
                 <Space component="br"/>
+                <Space component="br"/>
                 Our work focuses on data science and machine learning tools, as well as the infrastructure and security
                 to
                 support them.
