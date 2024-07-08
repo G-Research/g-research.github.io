@@ -9,7 +9,7 @@ import datetime as dt
 import re
 import json
 from pathlib import Path
-from github import Repository as GhRepository, Github, Auth, UnknownObjectException
+from github import Repository as GhRepository, Github, Auth, UnknownObjectException, GithubException
 import fire
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
@@ -83,8 +83,16 @@ def get_readme_text(gh_repo: GhRepository) -> t.Optional[str]:
         readme = gh_repo.get_readme()
         if readme:
             return readme.decoded_content.decode()
-    except UnknownObjectException as e:
+    except (UnknownObjectException, GithubException) as e:
         logger.warning(f"no readme found for '{gh_repo.full_name}': {e}")
+
+
+def get_current_user(g: Github) -> t.Optional[str]:
+    try:
+        current_user = g.get_user()
+        return current_user.login
+    except (UnknownObjectException, GithubException) as e:
+        logger.warning(f"no current user found: {e}")
 
 
 def extract_url(text: str, subs: list[str]) -> t.Optional[str]:
@@ -121,6 +129,11 @@ def collect_repositories(
         auth=Auth.Token(access_token) if access_token else None,
         per_page=100,
     )
+    current_user = get_current_user(g)
+    if current_user:
+        logger.success(f"authenticated as '{current_user}'")
+    else:
+        logger.warning("not authenticated!")
     for user_id in users:
         if limit is not None and len(all_repos) >= limit:
             break
