@@ -69,6 +69,7 @@ jobs:
             fi
           else
             echo "use_cache=false" >> $GITHUB_ENV
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
