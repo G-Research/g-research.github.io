@@ -50,18 +50,44 @@ jobs:
             echo "PREFIX_PATHS=false" >> $GITHUB_ENV
           fi
 
+      - name: Cache collected data
+        uses: actions/cache@v4
+        with:
+          path: static/data/repositories.json
+          key: ${{ runner.os }}-cache-repositories-${{ hashFiles('scripts/collect.py', 'static/data/repositories.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cache-repositories-
+
+      - name: Check if should use cache
+        run: |
+          if [ -f static/data/repositories.json ]; then
+            file_mod_time=$(stat -c %Y static/data/repositories.json)
+            current_time=$(date +%s)
+            time_diff=$((current_time - file_mod_time))
+            max_age=$((1 * 60 * 60)) # 1 hour in seconds (check GitHub API rate limit)
+            if [ $time_diff -lt $max_age ]; then
+              echo "use_cache=true" >> $GITHUB_ENV
+            else
+              echo "use_cache=false" >> $GITHUB_ENV
+            fi
+          else
+            echo "use_cache=false" >> $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v5
+        if: env.use_cache != 'true'
         with:
           python-version: '3.9'
           cache: 'pip'
 
       - name: Install Dependencies
+        if: env.use_cache != 'true'
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r scripts/requirements.txt
 
       - name: Collect data
+        if: env.use_cache != 'true'
         run: |
           python --version
           echo "Generating data..."
