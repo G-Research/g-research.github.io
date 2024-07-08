@@ -67,12 +67,12 @@ yarn install
 ### Start developing
 
 ```shell
-yarn run develop
+yarn develop
 ```
 
 ### Open the code and start customizing!
 
-Your site is now running at [http://localhost:8000](http://localhost:8000)!
+Your site is now running at [http://localhost:9000](http://localhost:9000)!
 
 Edit your code to see your site update in real-time!
 
