@@ -11,7 +11,7 @@
 This repository contains the source code for the G-Research organization website.
 
 The website is built using [Gatsby](https://www.gatsbyjs.com/), hosted on [GitHub Pages](https://pages.github.com/), and
-published at [g-research.github.io](https://g-research.github.io/).
+published at [g-research.github.io/](https://g-research.github.io/).
 
 ## Features
 
