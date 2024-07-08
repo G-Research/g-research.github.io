@@ -58,10 +58,14 @@ jobs:
       - name: Check if should use cache (set use_cache=true/false)
         run: |
           if [ -f static/data/repositories.json ]; then
-            file_mod_time=$(stat -c %Y static/data/repositories.json)
+            file_mod_time=$(stat -c "%Y" static/data/repositories.json)
+            echo "file_mod_time=$file_mod_time"
             current_time=$(date +%s)
+            echo "current_time=$current_time"
             time_diff=$((current_time - file_mod_time))
+            echo "time_diff=$time_diff"
             max_age=$((1 * 60 * 60)) # 1 hour in seconds (check GitHub API rate limit)
+            echo "max_age=$max_age"
             if [ $time_diff -lt $max_age ]; then
               echo "use_cache=true" >> $GITHUB_ENV
             else
