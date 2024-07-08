@@ -32,21 +32,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set has Pages to output
+      - name: Set 'has_pages' to output
         id: has-pages
         run: echo "has_pages=$(gh api repos/${{ github.repository }} --jq .has_pages)" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set repository name to output
-        id: repo-name
-        run: echo "repo_name=$(basename ${{ github.repository }})" >> $GITHUB_OUTPUT
-
-      - name: Set environment variables for build
-        id: set-env
+      - name: Set environment variables for build (PATH_PREFIX, PREFIX_PATHS)
         run: |
           if [ "${{ github.event.repository.fork }}" == "true" ]; then
-            echo "PATH_PREFIX=/${{ steps.repo-name.outputs.repo_name }}" >> $GITHUB_ENV
+            echo "PATH_PREFIX=/$(basename ${{ github.repository }})" >> $GITHUB_ENV
             echo "PREFIX_PATHS=true" >> $GITHUB_ENV
           else
             echo "PREFIX_PATHS=false" >> $GITHUB_ENV
@@ -60,7 +55,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cache-repositories-
 
-      - name: Check if should use cache
+      - name: Check if should use cache (set use_cache=true/false)
         run: |
           if [ -f static/data/repositories.json ]; then
             file_mod_time=$(stat -c %Y static/data/repositories.json)
