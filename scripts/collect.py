@@ -94,7 +94,7 @@ def get_current_user(g: Github) -> t.Optional[str]:
         logger.warning(f"no current user found: {e}")
 
 
-def extract_url(text: str, subs: list[str]) -> t.Optional[str]:
+def extract_url(text: str, matcher: t.Callable[[str], bool]) -> t.Optional[str]:
     """Extract first matching url."""
 
     def extract_all_urls(plain_text: str) -> list[str]:
@@ -104,7 +104,7 @@ def extract_url(text: str, subs: list[str]) -> t.Optional[str]:
 
     urls = extract_all_urls(text)
     for url in urls:
-        if any(sub in url for sub in subs):
+        if matcher(url):
             return url
 
 
@@ -155,10 +155,17 @@ def collect_repositories(
                 if readme_text:
                     discord_url = extract_url(
                         readme_text,
-                        ['discord.gg', 'discord.io', 'discord.me', 'discord.li',
-                         'discord.com/invite', 'discordapp.com/invite']
+                        lambda url: any(
+                            sub in url for sub in
+                            ['discord.gg', 'discord.io', 'discord.me', 'discord.li', 'discord.com/invite',
+                             'discordapp.com/invite']
+                        )
                     )
-                    slack_url = extract_url(readme_text, ['slack.com'])
+                    slack_url = extract_url(
+                        readme_text,
+                        lambda url: "slack.com" in url and any(
+                            sub in url for sub in ['join.', 'archives', 'shared_invite/', 'messages/'])
+                    )
             all_repos.append(
                 Repository(
                     id=repo_id,
