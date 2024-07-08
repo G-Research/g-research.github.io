@@ -21,7 +21,7 @@ import {filter_repositories} from '@core/data';
 
 
 type Props = {
-    generated_at: Date;
+    collected_at: Date;
     all_repos: Repository[];
     language_options: string[];
     topic_options: string[];
@@ -29,7 +29,7 @@ type Props = {
 }
 
 export default function ProjectsSectionView(
-    {generated_at, all_repos, language_options, topic_options, sort_by_options}: Props): React.JSX.Element {
+    {collected_at, all_repos, language_options, topic_options, sort_by_options}: Props): React.JSX.Element {
     const [languages, setLanguages] = useState<string[]>([]);
     const [topics, setTopics] = useState<string[]>([]);
     const [isActive, setIsActive] = useState<boolean>(true);
@@ -131,7 +131,7 @@ export default function ProjectsSectionView(
                     </Grid.Col>
                 </Grid>
                 <Tooltip position="bottom-start"
-                         label={`Data collected ${dayjs(generated_at).fromNow()} (${dayjs(generated_at).format("lll")})`}>
+                         label={`Data collected ${dayjs(collected_at).fromNow()} (${dayjs(collected_at).format("lll")})`}>
                     <Text ta="left" fz="sm" c="dimmed" mt="xs">
                         {repos.length} project{repos.length !== 1 ? 's' : ''} found
                     </Text>

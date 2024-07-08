@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react'
 import {
     SORT_BY_OPTIONS,
+    COLLECTED_AT,
     load_repositories,
     get_featured_projects,
     get_language_options,
@@ -26,7 +27,7 @@ import HeroSection from "@components/IndexPage/HeroSection"
 const IndexPage = ({data}: PageProps<DataProps>) => {
     const joinUsUrl = data.site.siteMetadata.joinUsUrl;
     const description = data.site.siteMetadata.description;
-    const generatedAt = data.site.siteMetadata.generatedAt;
+    const collectedAt = COLLECTED_AT || data.site.siteMetadata.builtAt;
     const featured = data.site.siteMetadata.featured;
     const repositories = load_repositories();
     const featuredProjects = get_featured_projects(repositories, featured);
@@ -89,7 +90,7 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
                 />
                 <ProjectsSection all_repos={repositories} language_options={language_options}
                                  sort_by_options={sort_by_options} topic_options={topic_options}
-                                 generated_at={generatedAt}/>
+                                 collected_at={collectedAt}/>
             </Container>
             <Footer
                 joinUsUrl={joinUsUrl}
@@ -116,7 +117,7 @@ export const query = graphql`
                 description
                 siteUrl
                 repositoryUrl
-                generatedAt
+                builtAt
                 githubUrl
                 xUrl
                 youtubeUrl

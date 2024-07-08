@@ -1,5 +1,5 @@
 import type {Repository} from "@core/types";
-import RAW_REPOSITORIES from "../../../static/data/repositories.json";
+import REPOSITORIES_DATA from "../../../static/data/repositories.json";
 import CUSTOM_VALUES from "../../../static/data/custom_values.json";
 
 function get_languages(repo: Repository): string[] {
@@ -76,7 +76,7 @@ export function get_featured_projects(
 }
 
 
-export function load_repositories(raw_repositories: Record<string, any>[] = RAW_REPOSITORIES, custom_values: Record<string, Record<string, string | number | boolean | null>> = CUSTOM_VALUES) {
+export function load_repositories(raw_repositories: Record<string, any>[] = REPOSITORIES_DATA.data, custom_values: Record<string, Record<string, string | number | boolean | null>> = CUSTOM_VALUES) {
     // override project metadata with custom values
     const fixed_custom_values = Object.fromEntries( // convert all keys to lowercase
         Object.entries(custom_values || {}).map(([key, value]) => [key.toLowerCase(), value])
@@ -117,3 +117,5 @@ export const SORT_BY_OPTIONS: string[] = [
     "Name",
     "Stars",
 ]
+
+export const COLLECTED_AT = new Date(REPOSITORIES_DATA.at);

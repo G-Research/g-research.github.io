@@ -38,15 +38,6 @@ export const query = graphql`
         site {
             siteMetadata {
                 title
-                description
-                websiteUrl
-                blogUrl
-                careersUrl
-                githubUrl
-                xUrl
-                youtubeUrl
-                joinUsUrl
-                generatedAt
             }
         }
     }

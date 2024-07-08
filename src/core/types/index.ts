@@ -6,7 +6,7 @@ export type DataProps = {
             description: string,
             siteUrl: string,
             repositoryUrl: string,
-            generatedAt: Date,
+            builtAt: Date,
             // social links
             githubUrl: string,
             xUrl: string,

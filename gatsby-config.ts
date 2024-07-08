@@ -8,7 +8,7 @@ const config: GatsbyConfig = {
         description: `Open-Source Software at G-Research`,
         siteUrl: `https://g-research.github.io`, // where site is hosted
         repositoryUrl: `https://github.com/G-Research/g-research.github.io`, // where the source code is hosted
-        generatedAt: new Date(),
+        builtAt: new Date(),
         // social links
         githubUrl: `https://github.com/G-Research`,
         xUrl: `https://x.com/oss_gr`,
