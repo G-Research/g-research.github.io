@@ -7,7 +7,6 @@ import pydantic as pd
 from loguru import logger
 import datetime as dt
 import re
-import json
 from pathlib import Path
 from github import Repository as GhRepository, Github, Auth, UnknownObjectException, GithubException
 import fire
@@ -203,6 +202,12 @@ def collect_repositories(
     return all_repos
 
 
+class RepositoriesData(pd.BaseModel):
+    at: dt.datetime
+    count: int
+    data: list[Repository]
+
+
 def main(access_token: t.Optional[str] = None):
     repos = collect_repositories(
         users=["m4rs-mt", "armadaproject", "G-Research"],
@@ -214,10 +219,11 @@ def main(access_token: t.Optional[str] = None):
         limit=None,
     )
     logger.info(f"collected {len(repos)} repositories")
-    data = [repo.model_dump(mode='json') for repo in repos]  # convert to json serializable
+    rdata = RepositoriesData(at=dt.datetime.now(dt.timezone.utc), count=len(repos), data=repos)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)  # create output directory if not exists
-    (OUTPUT_DIR / f"repositories.json").write_text(json.dumps(data, indent=2))  # write to file
-    logger.success(f"saved to '{OUTPUT_DIR / 'repositories.json'}'!")
+    output_path = OUTPUT_DIR / f"repositories.json"
+    output_path.write_text(rdata.model_dump_json(indent=2))  # write to file
+    logger.success(f"saved to '{output_path}'!")
 
 
 if __name__ == '__main__':
