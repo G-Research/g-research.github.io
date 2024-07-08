@@ -15,10 +15,10 @@ published at [g-research.github.io/](https://g-research.github.io/).
 
 ## Features
 
--[x] Showcases G-Research's open-source projects
--[x] Automatically collects and processes repository data from the GitHub API
--[x] Allows custom overrides for repository information
--[x] Supports custom logos for repositories
+- [x] Showcases G-Research's open-source projects
+- [x] Automatically collects and processes repository data from the GitHub API
+- [x] Allows custom overrides for repository information
+- [x] Supports custom logos for repositories
 
 ## Repository data
 
