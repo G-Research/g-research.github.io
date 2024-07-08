@@ -3,7 +3,7 @@
     <img alt="G-Research" src="https://github.com/G-Research/brand/raw/main/logo/GR-OSS/logo.svg" height="128" />
   </a>
    <h1>Open-Source at G-Research</h1>
-   <p>For a prettier and more inviting experience of looking at GR's current open-source projects.</p>
+   <p>Explore G-Research's open-source projects and learn more about our Open Source Program Office.</p>
 </div>
 
 # Organization website
