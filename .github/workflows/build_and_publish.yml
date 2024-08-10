@@ -1,0 +1,146 @@
+name: Build and deploy Gatsby site to GitHub Pages
+
+on:
+  push: # Runs on pushes targeting the default branch
+    branches: [ main ]
+  schedule:
+    - cron: "22 */4 * * *" # every 4 hours (UTC), minute!=0 to avoid high traffic times
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+permissions: # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults: # Default to bash
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      has_pages: ${{ steps.has-pages.outputs.has_pages }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set 'has_pages' to output
+        id: has-pages
+        run: echo "has_pages=$(gh api repos/${{ github.repository }} --jq .has_pages)" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set environment variables for build (PATH_PREFIX, PREFIX_PATHS)
+        run: |
+          if [ "${{ github.event.repository.fork }}" == "true" ]; then
+            echo "PATH_PREFIX=/$(basename ${{ github.repository }})" >> $GITHUB_ENV
+            echo "PREFIX_PATHS=true" >> $GITHUB_ENV
+          else
+            echo "PREFIX_PATHS=false" >> $GITHUB_ENV
+          fi
+
+      - name: Cache collected data
+        uses: actions/cache@v4
+        with:
+          path: static/data/repositories.json
+          key: ${{ runner.os }}-cache-repositories-${{ hashFiles('scripts/collect.py', 'static/data/repositories.json') }}
+          restore-keys: |
+            ${{ runner.os }}-cache-repositories-
+
+      - name: Check if should use cache (set use_cache=true/false)
+        run: |
+          if [ -f static/data/repositories.json ]; then
+            file_mod_time=$(stat -c "%Y" static/data/repositories.json)
+            echo "file_mod_time=$file_mod_time"
+            current_time=$(date +%s)
+            echo "current_time=$current_time"
+            time_diff=$((current_time - file_mod_time))
+            echo "time_diff=$time_diff"
+            max_age=$((1 * 60 * 60)) # 1 hour in seconds (check GitHub API rate limit)
+            echo "max_age=$max_age"
+            if [ $time_diff -lt $max_age ]; then
+              echo "use_cache=true" >> $GITHUB_ENV
+            else
+              echo "use_cache=false" >> $GITHUB_ENV
+            fi
+          else
+            echo "use_cache=false" >> $GITHUB_ENV
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        if: env.use_cache != 'true'
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        if: env.use_cache != 'true'
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r scripts/requirements.txt
+
+      - name: Collect data
+        if: env.use_cache != 'true'
+        run: |
+          python --version
+          echo "Generating data..."
+          python scripts/collect.py --access_token=${{ secrets.GITHUB_TOKEN }}
+          echo "Generated successfully!"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main' && steps.has-pages.outputs.has_pages == 'true'
+        with: # Automatically inject pathPrefix in your Gatsby configuration file.
+          static_site_generator: gatsby
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-gatsby-build-${{ hashFiles('public') }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-build-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build with Gatsby
+        run: yarn run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && steps.has-pages.outputs.has_pages == 'true'
+        with:
+          path: ./public
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && needs.build.outputs.has_pages == 'true'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
