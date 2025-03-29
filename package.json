@@ -17,30 +17,29 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mantine/carousel": "^7.10.1",
-    "@mantine/core": "^7.8.0",
-    "@mantine/dates": "^7.8.0",
-    "@mantine/form": "^7.8.0",
-    "@mantine/hooks": "^7.8.0",
-    "@mantine/modals": "^7.8.0",
-    "@tabler/icons-react": "^3.2.0",
-    "dayjs": "^1.11.10",
+    "@mantine/carousel": "^7.17.3",
+    "@mantine/core": "^7.17.3",
+    "@mantine/dates": "^7.17.3",
+    "@mantine/form": "^7.17.3",
+    "@mantine/hooks": "^7.17.3",
+    "@mantine/modals": "^7.17.3",
+    "@tabler/icons-react": "^3.31.0",
+    "dayjs": "^1.11.13",
     "embla-carousel-react": "^7.1.0",
-    "gatsby": "^5.13.3",
-    "gatsby-plugin-postcss": "^6.13.1",
-    "octokit": "^4.0.2",
-    "postcss": "^8.4.38",
-    "postcss-preset-mantine": "^1.14.4",
+    "gatsby": "^5.14.1",
+    "gatsby-plugin-postcss": "^6.14.0",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
+    "@types/node": "^22.13.14",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
     "gatsby-plugin-dts-css-modules": "^3.0.0",
     "gatsby-plugin-tsconfig-paths": "^1.0.6",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.2"
   }
 }
