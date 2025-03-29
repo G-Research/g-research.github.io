@@ -66,7 +66,9 @@ jobs:
             echo "time_diff=$time_diff"
             max_age=$((1 * 60 * 60)) # 1 hour in seconds (check GitHub API rate limit)
             echo "max_age=$max_age"
-            if [ $time_diff -lt $max_age ]; then
+            min_age=5 # 5 seconds (workaround for file-system returning current time as mtime for "too old" files)
+            echo "min_age=$min_age"
+            if [ $time_diff -lt $max_age ] && [ $time_diff -gt $min_age ]; then
               echo "use_cache=true" >> $GITHUB_ENV
             else
               echo "use_cache=false" >> $GITHUB_ENV
