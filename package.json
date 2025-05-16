@@ -23,10 +23,10 @@
     "@mantine/form": "^7.17.3",
     "@mantine/hooks": "^7.17.3",
     "@mantine/modals": "^7.17.3",
-    "@tabler/icons-react": "^3.31.0",
+    "@tabler/icons-react": "^3.33.0",
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^7.1.0",
-    "gatsby": "^5.14.1",
+    "gatsby": "^5.14.3",
     "gatsby-plugin-postcss": "^6.14.0",
     "postcss": "^8.5.3",
     "postcss-preset-mantine": "^1.17.0",
@@ -35,11 +35,14 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^22.13.14",
+    "@types/node": "^22.15.18",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.5",
     "gatsby-plugin-dts-css-modules": "^3.0.0",
     "gatsby-plugin-tsconfig-paths": "^1.0.6",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
+  },
+  "resolutions": {
+    "base-x": "^3.0.11"
   }
 }
