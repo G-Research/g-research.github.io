@@ -33,7 +33,7 @@ export default function HeaderView({description, socials}: Props): React.JSX.Ele
             <Grid justify="space-between" align="center" gutter={0}>
                 <Grid.Col span={4} visibleFrom="xs">
                     <Group justify="flex-start">
-                        <Text c="gray" size="sm" tt="uppercase">
+                        <Text c="gray" size="sm">
                             {description}
                         </Text>
                     </Group>
@@ -42,10 +42,10 @@ export default function HeaderView({description, socials}: Props): React.JSX.Ele
                     base: 12,
                     xs: 4,
                 }}>
-                    <Center>
+                    <Center py={12}>
                         <Logo alt="G-Research"
                               src="https://github.com/G-Research/brand/raw/main/logo/GR-OSS/logo.svg"
-                              height={96}/>
+                              height={72}/>
                     </Center>
                 </Grid.Col>
                 <Grid.Col span={4} visibleFrom="xs">

@@ -30,16 +30,19 @@ export default function FooterView({joinUsUrl, description, links, socials}: Pro
                 <Grid.Col span={{
                     base: 5,
                     sm: 4,
-                }}>
-                    <Stack justify="center" align="flex-start">
+                }} p={0}>
+                    <Stack justify="center" align="flex-start" gap={8}>
                         <Logo alt="G-Research"
                               src="https://github.com/G-Research/brand/raw/main/logo/GR/logo.svg"
                               height={96}/>
-                        <Text size="xs" c="gray" p={0} tt="uppercase">
-                            Create today.
+                        <Text size="sm" c="gray" p={0} m={0} pt={8}>
+                            Curious minds.
                         </Text>
-                        <Text size="xs" c="gray" p={0} tt="uppercase">
-                            Predict tomorrow.
+                        <Text size="sm" c="gray" p={0} m={0}>
+                            Complex problems.
+                        </Text>
+                        <Text size="sm" c="gray" p={0} m={0}>
+                            Enduring success.
                         </Text>
                     </Stack>
                 </Grid.Col>

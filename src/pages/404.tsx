@@ -15,8 +15,8 @@ const NotFoundPage: React.FC<PageProps> = () => {
                         alt="G-Research"
                         src="https://github.com/G-Research/brand/raw/main/logo/GR-OSS/logo.svg"
                         height={128}/>
-                    <Title ta="center" c="gray">Nothing to see here</Title>
-                    <Text c="dimmed" size="lg" p="lg" ta="center">
+                    <Title ta="center" c="gray" py='xl'>Nothing to see here</Title>
+                    <Text c="dimmed" size="lg" ta="center">
                         The page you are trying to open does not exist. You may have mistyped the address, or the
                         page has been moved to another URL. If you think this is an error contact support.
                     </Text>

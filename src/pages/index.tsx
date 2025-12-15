@@ -70,7 +70,7 @@ const IndexPage = ({data}: PageProps<DataProps>) => {
 
     return (
         <>
-            <Header description="Create today. Predict tomorrow." socials={socials}/>
+            <Header description="Curious minds. Complex problems. Enduring success." socials={socials}/>
             <HeroSection onExploreProjectsClick={() =>
                 scrollIntoProjectsSection({
                     alignment: 'start',

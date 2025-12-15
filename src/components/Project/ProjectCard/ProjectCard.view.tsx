@@ -39,6 +39,7 @@ export default function ProjectCardView({repo}: Props): React.JSX.Element {
                 }}
             />
             <Avatar
+                radius='md'
                 src={avatar_url.startsWith("/") ? withPrefix(`${avatar_url}`) : avatar_url}
                 size={80}
                 mx="auto"
