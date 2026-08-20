@@ -193,7 +193,7 @@ def collect_repositories(
                     private=gh_repo.private,
                     fork=gh_repo.fork,
                     archived=gh_repo.archived,
-                    disabled=gh_repo.archived,
+                    disabled=gh_repo.raw_data.get("disabled", False),
                     allow_forking=gh_repo.allow_forking,
                     is_template=gh_repo.is_template,
                     main_language=gh_repo.language,
@@ -205,7 +205,7 @@ def collect_repositories(
                 ))
     g.close()
     all_repos = list({rp.id: rp for rp in all_repos}.values())  # remove duplicates
-    all_repos.sort(key=lambda rp: gh_repo.id)  # sort by id
+    all_repos.sort(key=lambda rp: rp.id)  # sort by id
     return all_repos
 
 
