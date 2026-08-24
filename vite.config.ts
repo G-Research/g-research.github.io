@@ -17,8 +17,8 @@ export default defineConfig({
 
     // Port 9001 so this runs alongside Gatsby on 9000 during the migration.
     // Change to 9000 at cutover, once Gatsby is gone.
-    server: {port: 9001},
-    preview: {port: 9001},
+    server: {port: 9000},
+    preview: {port: 9000},
 
     resolve: {
         alias: {
