@@ -36,7 +36,11 @@
     "./src/core/**/*",
     "./src/components/ProjectCard.tsx",
     "./src/components/ProjectsSection.tsx",
-    "./vite.config.ts"
+    "./vite.config.ts",
+    "./src/components/Header.tsx",
+    "./src/components/Hero.tsx",
+    "./src/components/Featured.tsx",
+    "./src/components/Footer.tsx",
   ]
 }
  
