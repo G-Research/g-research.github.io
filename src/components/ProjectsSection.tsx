@@ -46,7 +46,7 @@ export default function ProjectsSection({repositories}: Props) {
     const topicOptions = useMemo(() => get_topic_options(repositories), [repositories])
 
     return (
-        <Grid gutter="xl">
+        <Grid gap="xl">
             <Grid.Col span={{base: 12, md: 4, lg: 3}}>
                 <Fieldset legend="Filter By">
                     <Fieldset legend="Status">
@@ -94,7 +94,7 @@ export default function ProjectsSection({repositories}: Props) {
             </Grid.Col>
 
             <Grid.Col span={{base: 12, md: 8, lg: 9}}>
-                <Grid gutter="md" mb="xs">
+                <Grid gap="md" mb="xs">
                     <Grid.Col span={{base: 12, sm: 8}}>
                         <TextInput
                             label="Search"

@@ -1,15 +1,27 @@
-import {Container, Title} from '@mantine/core'
-import {load_repositories} from '@core/data'
+import {get_featured_projects, load_repositories} from '@core/data'
+import {site} from '@core/site'
+import Header from '@components/Header'
+import Hero from '@components/Hero'
+import Featured from '@components/Featured'
 import ProjectsSection from '@components/ProjectsSection'
+import Footer from '@components/Footer'
+import {Container, Title} from '@mantine/core'
 
 export default function App() {
     // Called once: App holds no state, so it never re-renders.
     const repositories = load_repositories()
+    const featured = get_featured_projects(repositories, [...site.featured]).slice(0, 3)
 
     return (
-        <Container size="xl" py="xl">
-            <Title order={2} ta="center" mb="xl">All Projects</Title>
-            <ProjectsSection repositories={repositories}/>
-        </Container>
+        <>
+            <Header/>
+            <Hero/>
+            <Featured repositories={featured}/>
+            <Container size="xl" py="xl" id="projects">
+                <Title order={2} mb="md">All projects</Title>
+                <ProjectsSection repositories={repositories}/>
+            </Container>
+            <Footer/>
+        </>
     )
 }
