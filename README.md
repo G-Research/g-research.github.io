@@ -23,7 +23,7 @@ published at [g-research.github.io/](https://g-research.github.io/).
 ## Repository data
 
 The website automatically fetches data for G-Research's open-source projects from the GitHub API. This data is processed
-and stored in the [`static/data/`](./static/data/) directory in JSON format, which is then used to generate the website.
+and stored in the [`src/data/`](./src/data/) directory in JSON format, which is then used to generate the website.
 
 ### Overriding repository data
 
