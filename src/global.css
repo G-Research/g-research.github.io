@@ -7,28 +7,59 @@
  */
 
 :root {
-    /* Accent. Differs per scheme because lime is unreadable on white
-       (1.14:1) and royal blue is too dark on near-black (2.34:1).
-       Each passes comfortably in its own mode. */
-    --accent: light-dark(#0f25f2, #e5fc54);
-    --accent-fg: light-dark(#ffffff, #0a0a0a);
-    --accent-hover: light-dark(#0b1cc4, #d5ee3a);
-
-    /* Surfaces Mantine has no token for */
-    --sidebar-bg: light-dark(#f4f4f7, #161618);
-    --nav-bg: light-dark(rgba(255, 255, 255, .88), rgba(15, 15, 15, .88));
-
+    /* Light mode is the default set. */
+    --accent: #0f25f2;
+    --accent-fg: #ffffff;
+    --accent-hover: #0b1cc4;
+ 
+    --sidebar-bg: #f4f4f7;
+    --nav-bg: rgba(255, 255, 255, .88);
+ 
     /* Faint / decorative only. Fails WCAG contrast by design — never use
        this for content anyone needs to read. */
-    --text-muted: light-dark(#c0c0cc, #3e3e4a);
-
-    /* Icon buttons */
-    --icon-btn: light-dark(rgba(0, 0, 0, .06), rgba(255, 255, 255, .07));
-    --icon-btn-hover: light-dark(rgba(0, 0, 0, .12), rgba(255, 255, 255, .14));
-
-    /* Hover states */
-    --surface-hover: light-dark(#f0f0f4, #242428);
-    --border-hover: light-dark(rgba(0, 0, 0, .22), rgba(255, 255, 255, .22));
+    --text-muted: #c0c0cc;
+ 
+    --icon-btn: rgba(0, 0, 0, .06);
+    --icon-btn-hover: rgba(0, 0, 0, .12);
+ 
+    --surface-hover: #f0f0f4;
+    --border-hover: rgba(0, 0, 0, .22);
+ 
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, .07), 0 1px 3px rgba(0, 0, 0, .07);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .12);
+    --shadow-nav: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 12px rgba(0, 0, 0, .04);
+}
+ 
+[data-mantine-color-scheme='dark'] {
+    /* Lime, because royal blue is only 2.34:1 on #0f0f0f. */
+    --accent: #e5fc54;
+    --accent-fg: #0a0a0a;
+    --accent-hover: #d5ee3a;
+ 
+    --sidebar-bg: #161618;
+    --nav-bg: rgba(15, 15, 15, .88);
+ 
+    --text-muted: #3e3e4a;
+ 
+    --icon-btn: rgba(255, 255, 255, .07);
+    --icon-btn-hover: rgba(255, 255, 255, .14);
+ 
+    --surface-hover: #242428;
+    --border-hover: rgba(255, 255, 255, .22);
+ 
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, .4), 0 1px 3px rgba(0, 0, 0, .8);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, .55), 0 2px 6px rgba(0, 0, 0, .9);
+    --shadow-nav: 0 1px 3px rgba(0, 0, 0, .5), 0 1px 12px rgba(0, 0, 0, .3);
+}
+ 
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mantine-color-default-border);
+    box-shadow: var(--shadow-nav);
 }
 
 body {
@@ -71,6 +102,10 @@ body {
    Layout pieces
    -------------------------------------------------------------------- */
 
+/* Replace the existing .nav block in global.css with this. */
+
+/* Replace the existing .nav block in global.css with this. */
+
 .nav {
     position: sticky;
     top: 0;
@@ -78,6 +113,10 @@ body {
     background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--mantine-color-default-border);
+    /* Subtle lift so the bar reads as above the page when content
+       scrolls under it. Heavier in dark mode, where a 1px border alone
+       is nearly invisible. */
+    
 }
 
 .sidebar {
@@ -145,4 +184,23 @@ body {
         transition: none !important;
         animation: none !important;
     }
+}
+
+/* Append to global.css.
+   Only one logo variant is visible at a time. Using CSS rather than a
+   React hook avoids a flash of the wrong logo before the app mounts. */
+
+.logo-for-light,
+.logo-for-dark {
+    display: block;
+    width: auto;
+    object-fit: contain;
+}
+
+[data-mantine-color-scheme='dark'] .logo-for-light {
+    display: none;
+}
+
+[data-mantine-color-scheme='light'] .logo-for-dark {
+    display: none;
 }
