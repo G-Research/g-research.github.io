@@ -204,3 +204,33 @@ body {
 [data-mantine-color-scheme='light'] .logo-for-dark {
     display: none;
 }
+
+/* Append to global.css (replacing the earlier .footer block if present). */
+
+.footer {
+    background: var(--mantine-color-default);
+    border-top: 1px solid var(--mantine-color-default-border);
+    margin-top: var(--mantine-spacing-xl);
+}
+
+/* Three equal columns  */
+.footer {
+    background: var(--mantine-color-default);
+    border-top: 1px solid var(--mantine-color-default-border);
+    margin-top: var(--mantine-spacing-xl);
+}
+ 
+/* Below 48em everything stacks and centres. Mantine's Group already wraps,
+   but wrapped items stay left-aligned, so this centres them and gives the
+   rows a bit more breathing room. */
+@media (max-width: 48em) {
+    .footer-row {
+        justify-content: center;
+        text-align: center;
+        gap: var(--mantine-spacing-lg);
+    }
+ 
+    .footer-row > * {
+        justify-content: center;
+    }
+}
