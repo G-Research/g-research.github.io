@@ -33,7 +33,6 @@ export const site = {
     featured: [
         'armadaproject/armada',
         'm4rs-mt/ILGPU',
-        'G-Research/fasttrackml',
         'G-Research/consuldotnet',
         'G-Research/ParquetSharp',
     ],

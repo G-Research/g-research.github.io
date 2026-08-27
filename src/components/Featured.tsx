@@ -1,6 +1,7 @@
 import {Container, SimpleGrid, Title} from '@mantine/core'
 import type {Repository} from '@core/types'
 import ProjectCard from './ProjectCard'
+import SectionHeading from './SectionHeading'
 
 type Props = {
     repositories: Repository[]
@@ -12,7 +13,7 @@ export default function Featured({repositories}: Props) {
 
     return (
         <Container size="xl" py="xl">
-            <Title order={2} mb="md">Featured projects</Title>
+            <SectionHeading>Featured projects</SectionHeading>
             <SimpleGrid cols={{base: 1, sm: 2, lg: 3}} spacing="md">
                 {repositories.map(repo => (
                     <ProjectCard key={repo.id} repo={repo}/>

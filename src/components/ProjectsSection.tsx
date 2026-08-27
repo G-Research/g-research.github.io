@@ -52,16 +52,19 @@ export default function ProjectsSection({repositories}: Props) {
                     <Fieldset legend="Status">
                         <Stack gap="xs">
                             <Checkbox
+                                iconColor="#0a0a0a"
                                 label="Active"
                                 checked={isActive}
                                 onChange={e => setIsActive(e.currentTarget.checked)}
                             />
                             <Checkbox
+                                iconColor="#0a0a0a"
                                 label="Archived"
                                 checked={isArchived}
                                 onChange={e => setIsArchived(e.currentTarget.checked)}
                             />
                             <Checkbox
+                                iconColor="#0a0a0a"
                                 label="Forks"
                                 checked={isFork}
                                 onChange={e => setIsFork(e.currentTarget.checked)}
@@ -122,7 +125,7 @@ export default function ProjectsSection({repositories}: Props) {
                 {results.length === 0 ? (
                     <Text c="dimmed">No projects match these filters.</Text>
                 ) : (
-                    <SimpleGrid cols={{base: 1, lg: 2}} spacing="md">
+                    <SimpleGrid cols={{base: 1, sm: 2, lg: 3}} spacing="md">
                         {results.map(repo => (
                             <ProjectCard key={repo.id} repo={repo}/>
                         ))}

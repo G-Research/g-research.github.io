@@ -15,9 +15,6 @@
     --sidebar-bg: #f4f4f7;
     --nav-bg: rgba(255, 255, 255, .88);
  
-    /* Faint / decorative only. Fails WCAG contrast by design — never use
-       this for content anyone needs to read. */
-    --text-muted: #c0c0cc;
  
     --icon-btn: rgba(0, 0, 0, .06);
     --icon-btn-hover: rgba(0, 0, 0, .12);
@@ -130,7 +127,7 @@ body {
     position: relative;
     isolation: isolate;
 }
-
+ 
 .grid-bg::before {
     content: '';
     position: absolute;
@@ -140,34 +137,45 @@ body {
     background-image:
         repeating-linear-gradient(to right,
             var(--mantine-color-default-border) 0 1px,
-            transparent 1px 100px),
+            transparent 1px 48px),
         repeating-linear-gradient(to bottom,
             var(--mantine-color-default-border) 0 1px,
-            transparent 1px 100px);
-    opacity: .5;
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            transparent 1px 48px);
+    opacity: .6;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
 }
+ 
 
-/* Section heading with a trailing hairline rule */
+.section-heading {
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+}
+ 
 .section-rule {
     flex: 1;
     height: 1px;
     background: var(--mantine-color-default-border);
 }
-
+ 
 /* --------------------------------------------------------------------
    Cards
    -------------------------------------------------------------------- */
 
+
 .project-card {
+    background: var(--mantine-color-default);
     transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-
+ 
 .project-card:hover {
     border-color: var(--border-hover);
-    box-shadow: var(--mantine-shadow-lg);
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
 }
+ 
 
 /* Neutral fallback tile when a repo has no hosted logo. */
 .logo-fallback {
@@ -186,10 +194,6 @@ body {
     }
 }
 
-/* Append to global.css.
-   Only one logo variant is visible at a time. Using CSS rather than a
-   React hook avoids a flash of the wrong logo before the app mounts. */
-
 .logo-for-light,
 .logo-for-dark {
     display: block;
@@ -205,7 +209,6 @@ body {
     display: none;
 }
 
-/* Append to global.css (replacing the earlier .footer block if present). */
 
 .footer {
     background: var(--mantine-color-default);
@@ -213,16 +216,7 @@ body {
     margin-top: var(--mantine-spacing-xl);
 }
 
-/* Three equal columns  */
-.footer {
-    background: var(--mantine-color-default);
-    border-top: 1px solid var(--mantine-color-default-border);
-    margin-top: var(--mantine-spacing-xl);
-}
  
-/* Below 48em everything stacks and centres. Mantine's Group already wraps,
-   but wrapped items stay left-aligned, so this centres them and gives the
-   rows a bit more breathing room. */
 @media (max-width: 48em) {
     .footer-row {
         justify-content: center;
@@ -233,4 +227,52 @@ body {
     .footer-row > * {
         justify-content: center;
     }
+
+     .hero-stack {
+        max-width: none;
+        text-align: center;
+        align-items: center;
+    }
+ 
+    .hero-cta {
+        justify-content: center;
+    }
+}
+
+.hero-eyebrow {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+ 
+ 
+.project-owner {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+ 
+.project-badge {
+    font-size: 10px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--mantine-color-orange-4);
+    background: var(--mantine-color-orange-light);
+    padding: 2px 8px;
+    border-radius: var(--mantine-radius-sm);
+}
+ 
+.icon-btn {
+    background: var(--icon-btn);
+}
+ 
+.icon-btn:hover {
+    background: var(--icon-btn-hover);
+}
+ 
+.hero-sub {
+    display: block;
+    font-size: .5em;
+    font-weight: 900;
+    color: var(--mantine-color-text);
 }

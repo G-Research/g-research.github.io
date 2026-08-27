@@ -1,12 +1,12 @@
-import {createTheme} from '@mantine/core'
+import {createTheme, virtualColor} from '@mantine/core'
 
 /**
- * Mantine theme. Only covers what Mantine itself owns: palettes, radius,
- * shadows, fonts. Anything Mantine has no token for (accent colour, sidebar
- * background, frosted nav) lives in global.css as a CSS variable.
+ * Mantine theme. Covers what Mantine itself owns: palettes, radius, shadows,
+ * fonts. Anything Mantine has no token for (sidebar background, frosted nav)
+ * lives in global.css as a CSS variable.
  *
  * Mantine requires 10 shades per colour even where only a few are used.
- * The indices that actually matter:
+ * The indices that matter for the neutrals:
  *   dark[7] = body background
  *   dark[6] = cards, inputs, surfaces
  *   dark[4] = borders
@@ -14,8 +14,31 @@ import {createTheme} from '@mantine/core'
  *   dark[0] = primary text
  */
 export const theme = createTheme({
-    // Design tokens
-    colors:{
+    colors: {
+        /* Shades 4–6 are all the exact neon. Mantine's `subtle` and `light`
+           variants reach for shade 4 rather than primaryShade, and a normal
+           ramp puts a washed-out pale yellow there — which is why the social
+           icons rendered near-white in dark mode. */
+        lime: [
+            '#e1ee94', '#f0f4d7', '#ebf1c2', '#e6efab', '#e1ee94',
+            '#deee7b', '#e5fc54', '#dcfb17', '#b5d104', '#819503',
+        ],
+
+        royal: [
+            '#ecedf9', '#ced2f0', '#afb5ea', '#8e96e5',
+            '#4655e1', '#1f34f5', '#0f25f2', '#0b1dc7',
+            '#08179a', '#06106e',
+        ],
+
+        /* Mantine has no native per-scheme colour, and the accent has to
+           differ: lime is 1.14:1 on white (invisible) and royal blue is
+           2.34:1 on #0f0f0f (fails). virtualColor resolves per scheme. */
+        accent: virtualColor({
+            name: 'accent',
+            light: 'royal',
+            dark: 'lime',
+        }),
+
         dark: [
             '#ffffff', // 0  text
             '#e4e4e8', // 1
@@ -42,11 +65,19 @@ export const theme = createTheme({
             '#0a0a0a', // 9  text
         ],
     },
-    // `accent` is defined in global.css via light-dark(), because Mantine has
-    // no native per-scheme colour and the value differs by mode:
-    //   dark  → lime  #e5fc54  (16.8:1 on #0f0f0f)
-    //   light → blue  #0f25f2  (8.2:1 on #ffffff)
-    // Lime is unusable in light mode (1.14:1 on white), hence the split.
+
+    /* Every component that uses the primary colour — Checkbox, ActionIcon
+       subtle, Select, focus rings — reads this. Setting it once is why none
+       of those need per-component classes. */
+    primaryColor: 'accent',
+
+    /* Default is {light: 6, dark: 8}. Shade 8 of the lime ramp is a dark
+       olive, not the neon, so pin both to 6. */
+    primaryShade: 6,
+
+    /* Picks black or white text on accent fills automatically: black on lime
+       (17.3:1), white on royal blue (8.2:1). */
+    autoContrast: true,
 
     defaultRadius: 'md',
     radius: {
@@ -56,11 +87,13 @@ export const theme = createTheme({
         xl: '20px',
     },
 
-    // Matched to the Figma shadow tokens
+    /* Point at the CSS variables rather than using light-dark() here.
+       These are JavaScript strings that never pass through postcss, so
+       light-dark() would be emitted raw and silently do nothing. */
     shadows: {
-        sm: '0 1px 2px light-dark(rgba(0,0,0,.07), rgba(0,0,0,.4))',
-        md: '0 4px 12px light-dark(rgba(0,0,0,.07), rgba(0,0,0,.4)), 0 1px 3px light-dark(rgba(0,0,0,.07), rgba(0,0,0,.8))',
-        lg: '0 8px 24px light-dark(rgba(0,0,0,.1), rgba(0,0,0,.55)), 0 2px 6px light-dark(rgba(0,0,0,.12), rgba(0,0,0,.9))',
+        sm: 'var(--shadow-card)',
+        md: 'var(--shadow-card)',
+        lg: 'var(--shadow-card-hover)',
     },
 
     headings: {
@@ -74,12 +107,11 @@ export const theme = createTheme({
     // System fonts for now. Swap here once the licence question is settled.
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
 
-    // Keyboard focus ring. Not in the Figma token list, but required by
-    // WCAG 2.4.7 — without this it falls back to the browser default.
+    /* Keyboard focus ring. Not in the Figma token list, but required by
+       WCAG 2.4.7 — without this it falls back to the browser default. */
     focusRing: 'auto',
 
     other: {
-        // Values components can read via useMantineTheme().other
         navHeight: 60,
     },
 })

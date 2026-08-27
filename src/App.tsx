@@ -6,6 +6,7 @@ import Featured from '@components/Featured'
 import ProjectsSection from '@components/ProjectsSection'
 import Footer from '@components/Footer'
 import {Container, Title} from '@mantine/core'
+import SectionHeading from '@components/SectionHeading'
 
 export default function App() {
     // Called once: App holds no state, so it never re-renders.
@@ -18,7 +19,7 @@ export default function App() {
             <Hero/>
             <Featured repositories={featured}/>
             <Container size="xl" py="xl" id="projects">
-                <Title order={2} mb="md">All projects</Title>
+                <SectionHeading>All projects</SectionHeading>
                 <ProjectsSection repositories={repositories}/>
             </Container>
             <Footer/>
