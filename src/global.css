@@ -1,0 +1,148 @@
+/*
+ * Global styles and the design tokens Mantine has no home for.
+ * Imported from main.tsx AFTER '@mantine/core/styles.css' so these win.
+ *
+ * light-dark() is handled by postcss-preset-mantine, so it works in every
+ * browser Mantine supports, not just the ones with native support.
+ */
+
+:root {
+    /* Accent. Differs per scheme because lime is unreadable on white
+       (1.14:1) and royal blue is too dark on near-black (2.34:1).
+       Each passes comfortably in its own mode. */
+    --accent: light-dark(#0f25f2, #e5fc54);
+    --accent-fg: light-dark(#ffffff, #0a0a0a);
+    --accent-hover: light-dark(#0b1cc4, #d5ee3a);
+
+    /* Surfaces Mantine has no token for */
+    --sidebar-bg: light-dark(#f4f4f7, #161618);
+    --nav-bg: light-dark(rgba(255, 255, 255, .88), rgba(15, 15, 15, .88));
+
+    /* Faint / decorative only. Fails WCAG contrast by design — never use
+       this for content anyone needs to read. */
+    --text-muted: light-dark(#c0c0cc, #3e3e4a);
+
+    /* Icon buttons */
+    --icon-btn: light-dark(rgba(0, 0, 0, .06), rgba(255, 255, 255, .07));
+    --icon-btn-hover: light-dark(rgba(0, 0, 0, .12), rgba(255, 255, 255, .14));
+
+    /* Hover states */
+    --surface-hover: light-dark(#f0f0f4, #242428);
+    --border-hover: light-dark(rgba(0, 0, 0, .22), rgba(255, 255, 255, .22));
+}
+
+body {
+    background: var(--mantine-color-body);
+}
+
+/* --------------------------------------------------------------------
+   Accent utilities
+   Mantine's `color` prop only accepts theme colour names, not CSS
+   variables, so accent-coloured elements use these classes instead.
+   -------------------------------------------------------------------- */
+
+.accent-text {
+    color: var(--accent);
+}
+
+.accent-button {
+    background: var(--accent);
+    color: var(--accent-fg);
+    border: none;
+}
+
+.accent-button:hover {
+    background: var(--accent-hover);
+}
+
+/* Checkbox uses the accent rather than a fixed blue. In dark mode the
+   Figma blue was 2.34:1 against the background, failing WCAG 1.4.11
+   for a control that conveys state. */
+.accent-checkbox input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.accent-checkbox input:checked + svg {
+    color: var(--accent-fg);
+}
+
+/* --------------------------------------------------------------------
+   Layout pieces
+   -------------------------------------------------------------------- */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mantine-color-default-border);
+}
+
+.sidebar {
+    background: var(--sidebar-bg);
+    border-radius: var(--mantine-radius-lg);
+}
+
+/* Blueprint grid behind the hero. Decorative, so hidden from assistive
+   tech by virtue of being a background rather than an element. */
+.grid-bg {
+    position: relative;
+    isolation: isolate;
+}
+
+.grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        repeating-linear-gradient(to right,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 100px),
+        repeating-linear-gradient(to bottom,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 100px);
+    opacity: .5;
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* Section heading with a trailing hairline rule */
+.section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--mantine-color-default-border);
+}
+
+/* --------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------- */
+
+.project-card {
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.project-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--mantine-shadow-lg);
+    transform: translateY(-2px);
+}
+
+/* Neutral fallback tile when a repo has no hosted logo. */
+.logo-fallback {
+    display: grid;
+    place-items: center;
+    background: var(--surface-hover);
+    color: var(--mantine-color-dimmed);
+    font-weight: 700;
+    border-radius: var(--mantine-radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
