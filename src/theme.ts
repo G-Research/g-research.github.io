@@ -20,7 +20,7 @@ export const theme = createTheme({
            ramp puts a washed-out pale yellow there — which is why the social
            icons rendered near-white in dark mode. */
         lime: [
-            '#e8eebd', '#f0f4d7', '#ebf1c2', '#e6efab', '#e1ee94',
+            '#f4f6de', '#f0f4d7', '#ebf1c2', '#e6efab', '#e1ee94',
             '#deee7b', '#e5fc54', '#dcfb17', '#b5d104', '#819503',
         ],
 
