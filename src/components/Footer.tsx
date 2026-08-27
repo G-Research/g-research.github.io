@@ -1,4 +1,4 @@
-import {ActionIcon, Anchor, Button, Container, Divider, Group} from '@mantine/core'
+import {ActionIcon, Anchor, Button, Container, Divider, Group, Stack, Text} from '@mantine/core'
 import {IconArrowRight, IconBrandGithub, IconBrandX, IconBrandYoutube} from '@tabler/icons-react'
 import {site} from '@core/site'
 import Logo from './Logo'
@@ -19,16 +19,22 @@ export default function Footer() {
     return (
         <footer className="footer">
             <Container size="lg" py="xl">
-                {/* Top: logo left, Join us right */}
+                {/* Top: square logo and blurb left, Join us right */}
                 <Group className="footer-row" justify="space-between" align="center" wrap="wrap" gap="xl">
-                    <Logo variant="footer" size={56} withText={false}/>
+                    <Group className="footer-brand" gap="md" wrap="nowrap" align="center" maw="62ch">
+                        <Logo variant="header" size={100} withText={false}/>
+                        <Text size="md" c="dimmed">
+                            We hire the brightest minds to tackle the biggest questions in finance.
+                            We pair our people's expertise with machine learning, big data, and
+                            emerging tech to predict movements in financial markets.
+                        </Text>
+                    </Group>
 
                     <Button
                         component="a"
                         href={site.joinUsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="accent-button"
                         size="sm"
                         rightSection={<IconArrowRight size={15}/>}
                     >
@@ -40,9 +46,9 @@ export default function Footer() {
 
                 {/* Bottom: tagline left, links then socials right */}
                 <Group className="footer-row" justify="space-between" align="center" wrap="wrap" gap="md">
-                    <Anchor component="span" size="sm" c="dimmed" underline="never">
+                    <Text size="sm" c="dimmed">
                         Curious minds. Complex problems. Enduring success.
-                    </Anchor>
+                    </Text>
 
                     <Group className="footer-row" gap="xl" wrap="wrap" align="center">
                         <Group gap="lg" wrap="wrap">

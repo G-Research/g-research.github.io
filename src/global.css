@@ -228,7 +228,14 @@ body {
         justify-content: center;
     }
 
-     .hero-stack {
+    .footer-brand {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        max-width: none;
+    }
+
+    .hero-stack {
         max-width: none;
         text-align: center;
         align-items: center;
@@ -276,3 +283,4 @@ body {
     font-weight: 900;
     color: var(--mantine-color-text);
 }
+
