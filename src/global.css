@@ -1,0 +1,292 @@
+/*
+ * Global styles and the design tokens Mantine has no home for.
+ * Imported from main.tsx AFTER '@mantine/core/styles.css' so these win.
+ *
+ * light-dark() is handled by postcss-preset-mantine, so it works in every
+ * browser Mantine supports, not just the ones with native support.
+ */
+
+:root {
+    /* Light mode is the default set. */
+    --accent: #0f25f2;
+    --accent-fg: #ffffff;
+    --accent-hover: #0b1cc4;
+ 
+    --sidebar-bg: #f4f4f7;
+    --nav-bg: rgba(255, 255, 255, .88);
+ 
+ 
+    --icon-btn: rgba(0, 0, 0, .06);
+    --icon-btn-hover: rgba(0, 0, 0, .12);
+ 
+    --surface-hover: #f0f0f4;
+    --border-hover: rgba(0, 0, 0, .22);
+ 
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, .07), 0 1px 3px rgba(0, 0, 0, .07);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .12);
+    --shadow-nav: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 12px rgba(0, 0, 0, .04);
+}
+ 
+[data-mantine-color-scheme='dark'] {
+    /* Lime, because royal blue is only 2.34:1 on #0f0f0f. */
+    --accent: #e5fc54;
+    --accent-fg: #0a0a0a;
+    --accent-hover: #d5ee3a;
+ 
+    --sidebar-bg: #161618;
+    --nav-bg: rgba(15, 15, 15, .88);
+ 
+    --text-muted: #3e3e4a;
+ 
+    --icon-btn: rgba(255, 255, 255, .07);
+    --icon-btn-hover: rgba(255, 255, 255, .14);
+ 
+    --surface-hover: #242428;
+    --border-hover: rgba(255, 255, 255, .22);
+ 
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, .4), 0 1px 3px rgba(0, 0, 0, .8);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, .55), 0 2px 6px rgba(0, 0, 0, .9);
+    --shadow-nav: 0 1px 3px rgba(0, 0, 0, .5), 0 1px 12px rgba(0, 0, 0, .3);
+}
+ 
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mantine-color-default-border);
+    box-shadow: var(--shadow-nav);
+}
+
+body {
+    background: var(--mantine-color-body);
+}
+
+/* --------------------------------------------------------------------
+   Accent utilities
+   Mantine's `color` prop only accepts theme colour names, not CSS
+   variables, so accent-coloured elements use these classes instead.
+   -------------------------------------------------------------------- */
+
+.accent-text {
+    color: var(--accent);
+}
+
+.accent-button {
+    background: var(--accent);
+    color: var(--accent-fg);
+    border: none;
+}
+
+.accent-button:hover {
+    background: var(--accent-hover);
+}
+
+/* Checkbox uses the accent rather than a fixed blue. In dark mode the
+   Figma blue was 2.34:1 against the background, failing WCAG 1.4.11
+   for a control that conveys state. */
+.accent-checkbox input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.accent-checkbox input:checked + svg {
+    color: var(--accent-fg);
+}
+
+/* --------------------------------------------------------------------
+   Layout pieces
+   -------------------------------------------------------------------- */
+
+/* Replace the existing .nav block in global.css with this. */
+
+/* Replace the existing .nav block in global.css with this. */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mantine-color-default-border);
+    /* Subtle lift so the bar reads as above the page when content
+       scrolls under it. Heavier in dark mode, where a 1px border alone
+       is nearly invisible. */
+    
+}
+
+.sidebar {
+    background: var(--sidebar-bg);
+    border-radius: var(--mantine-radius-lg);
+}
+
+/* Blueprint grid behind the hero. Decorative, so hidden from assistive
+   tech by virtue of being a background rather than an element. */
+.grid-bg {
+    position: relative;
+    isolation: isolate;
+}
+ 
+.grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        repeating-linear-gradient(to right,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 48px),
+        repeating-linear-gradient(to bottom,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 48px);
+    opacity: .6;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+ 
+
+.section-heading {
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+}
+ 
+.section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--mantine-color-default-border);
+}
+ 
+/* --------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------- */
+
+
+.project-card {
+    background: var(--mantine-color-default);
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+ 
+.project-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+}
+ 
+
+/* Neutral fallback tile when a repo has no hosted logo. */
+.logo-fallback {
+    display: grid;
+    place-items: center;
+    background: var(--surface-hover);
+    color: var(--mantine-color-dimmed);
+    font-weight: 700;
+    border-radius: var(--mantine-radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+.logo-for-light,
+.logo-for-dark {
+    display: block;
+    width: auto;
+    object-fit: contain;
+}
+
+[data-mantine-color-scheme='dark'] .logo-for-light {
+    display: none;
+}
+
+[data-mantine-color-scheme='light'] .logo-for-dark {
+    display: none;
+}
+
+
+.footer {
+    background: var(--mantine-color-default);
+    border-top: 1px solid var(--mantine-color-default-border);
+    margin-top: var(--mantine-spacing-xl);
+}
+
+ 
+@media (max-width: 48em) {
+    .footer-row {
+        justify-content: center;
+        text-align: center;
+        gap: var(--mantine-spacing-lg);
+    }
+ 
+    .footer-row > * {
+        justify-content: center;
+    }
+
+    .footer-brand {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        max-width: none;
+    }
+
+    .hero-stack {
+        max-width: none;
+        text-align: center;
+        align-items: center;
+    }
+ 
+    .hero-cta {
+        justify-content: center;
+    }
+}
+
+.hero-eyebrow {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+ 
+ 
+.project-owner {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+ 
+.project-badge {
+    font-size: 10px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--mantine-color-orange-4);
+    background: var(--mantine-color-orange-light);
+    padding: 2px 8px;
+    border-radius: var(--mantine-radius-sm);
+}
+ 
+.icon-btn {
+    background: var(--icon-btn);
+}
+ 
+.icon-btn:hover {
+    background: var(--icon-btn-hover);
+}
+ 
+.hero-sub {
+    display: block;
+    font-size: .5em;
+    font-weight: 900;
+    color: var(--mantine-color-text);
+}
+
+/* Inputs and unticked checkboxes are identified only by their border,
+   so WCAG 1.4.11 needs 3:1 here. #8f8f99 is 3.2:1 on white. */
+[data-mantine-color-scheme='light'] .mantine-Input-input,
+[data-mantine-color-scheme='light'] .mantine-Checkbox-input {
+    border-color: #8f8f99;
+}

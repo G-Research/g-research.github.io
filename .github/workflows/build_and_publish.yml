@@ -1,4 +1,4 @@
-name: Build and deploy Gatsby site to GitHub Pages
+name: Build and deploy site to GitHub Pages
 
 on:
   push: # Runs on pushes targeting the default branch
@@ -38,27 +38,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set environment variables for build (PATH_PREFIX, PREFIX_PATHS)
+      - name: Set environment variables for build (PATH_PREFIX)
         run: |
           if [ "${{ github.event.repository.fork }}" == "true" ]; then
             echo "PATH_PREFIX=/$(basename ${{ github.repository }})" >> $GITHUB_ENV
-            echo "PREFIX_PATHS=true" >> $GITHUB_ENV
-          else
-            echo "PREFIX_PATHS=false" >> $GITHUB_ENV
           fi
 
       - name: Cache collected data
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
-          path: static/data/repositories.json
-          key: ${{ runner.os }}-cache-repositories-${{ hashFiles('scripts/collect.py', 'static/data/repositories.json') }}
+          path: src/data/repositories.json
+          key: ${{ runner.os }}-cache-repositories-${{ hashFiles('scripts/collect.py', 'src/data/repositories.json') }}
           restore-keys: |
             ${{ runner.os }}-cache-repositories-
 
       - name: Check if should use cache (set use_cache=true/false)
         run: |
-          if [ -f static/data/repositories.json ]; then
-            file_mod_time=$(stat -c "%Y" static/data/repositories.json)
+          if [ -f src/data/repositories.json ]; then
+            file_mod_time=$(stat -c "%Y" src/data/repositories.json)
             echo "file_mod_time=$file_mod_time"
             current_time=$(date +%s)
             echo "current_time=$current_time"
@@ -109,30 +106,18 @@ jobs:
         id: pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         if: github.ref == 'refs/heads/main' && steps.has-pages.outputs.has_pages == 'true'
-        with: # Automatically inject pathPrefix in your Gatsby configuration file.
-          static_site_generator: gatsby
-
-      - name: Restore cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
-        with:
-          path: |
-            public
-            .cache
-          key: ${{ runner.os }}-gatsby-build-${{ hashFiles('public') }}
-          restore-keys: |
-            ${{ runner.os }}-gatsby-build-
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Build with Gatsby
+      - name: Build site
         run: yarn run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         if: github.ref == 'refs/heads/main' && steps.has-pages.outputs.has_pages == 'true'
         with:
-          path: ./public
+          path: ./dist
 
   # Deployment job
   deploy:
