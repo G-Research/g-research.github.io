@@ -1,5 +1,5 @@
 """
-Collect repositories from GitHub and save them to a JSON file in the 'static/data' directory.
+Collect repositories from GitHub and save them to a JSON file in the 'src/data' directory.
 """
 
 import typing as t
