@@ -52,19 +52,19 @@ export default function ProjectsSection({repositories}: Props) {
                     <Fieldset legend="Status">
                         <Stack gap="xs">
                             <Checkbox
-                                iconColor="#0a0a0a"
+                                iconColor="var(--accent-fg)"
                                 label="Active"
                                 checked={isActive}
                                 onChange={e => setIsActive(e.currentTarget.checked)}
                             />
                             <Checkbox
-                                iconColor="#0a0a0a"
+                                iconColor="var(--accent-fg)"
                                 label="Archived"
                                 checked={isArchived}
                                 onChange={e => setIsArchived(e.currentTarget.checked)}
                             />
                             <Checkbox
-                                iconColor="#0a0a0a"
+                                iconColor="var(--accent-fg)"
                                 label="Forks"
                                 checked={isFork}
                                 onChange={e => setIsFork(e.currentTarget.checked)}

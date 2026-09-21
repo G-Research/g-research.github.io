@@ -16,12 +16,14 @@ export default function App() {
     return (
         <>
             <Header/>
+            <main>
             <Hero/>
             <Featured repositories={featured}/>
             <Container size="xl" py="xl" id="projects">
                 <SectionHeading>All projects</SectionHeading>
                 <ProjectsSection repositories={repositories}/>
             </Container>
+            </main>
             <Footer/>
         </>
     )

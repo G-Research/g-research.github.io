@@ -56,11 +56,11 @@ export const theme = createTheme({
             '#ffffff', // 0  bg
             '#f9f9f9', // 1  surface
             '#f4f4f7', // 2  sidebar
-            '#f0f0f4', // 3  surfaceHov
-            '#e2e2e6', // 4  border
-            '#c0c0cc', // 5  textMuted
-            '#8a8a94', // 6
-            '#555560', // 7  textSub — 7.4:1 on white, passes AA
+            '#e8e8ee', // 3  surfaceHov   (was #f0f0f4)
+            '#cacad2', // 4  border       (was #e2e2e6)
+            '#a8a8b2', // 5  textMuted    (was #c0c0cc) — decorative only
+            '#686872', // 6  dimmed text — 5.5:1 on white
+            '#555560', // 7  textSub — 7.4:1 on white
             '#2a2a30', // 8
             '#0a0a0a', // 9  text
         ],

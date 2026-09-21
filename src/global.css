@@ -284,3 +284,9 @@ body {
     color: var(--mantine-color-text);
 }
 
+/* Inputs and unticked checkboxes are identified only by their border,
+   so WCAG 1.4.11 needs 3:1 here. #8f8f99 is 3.2:1 on white. */
+[data-mantine-color-scheme='light'] .mantine-Input-input,
+[data-mantine-color-scheme='light'] .mantine-Checkbox-input {
+    border-color: #8f8f99;
+}
