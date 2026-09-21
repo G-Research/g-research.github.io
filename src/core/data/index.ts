@@ -1,6 +1,7 @@
 import type {Repository} from "@core/types";
-import REPOSITORIES_DATA from "../../../static/data/repositories.json";
-import CUSTOM_VALUES from "../../../static/data/custom_values.json";
+import REPOSITORIES_DATA from "../../data/repositories.json";
+import CUSTOM_VALUES from "../../data/custom_values.json";
+
 
 function get_languages(repo: Repository): string[] {
     const results = Object.keys(repo.languages);
