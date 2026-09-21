@@ -1,5 +1,5 @@
 """
-Collect repositories from GitHub and save them to a JSON file in the 'static/data' directory.
+Collect repositories from GitHub and save them to a JSON file in the 'src/data' directory.
 """
 
 import typing as t
@@ -14,7 +14,7 @@ import fire
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 logger.debug(f"PROJECT_DIR: {PROJECT_DIR}")
 STATIC_DIR = PROJECT_DIR / "static"
-OUTPUT_DIR = PROJECT_DIR / "static" / "data"
+OUTPUT_DIR = PROJECT_DIR / "src" / "data"
 
 
 class Repository(pd.BaseModel):
