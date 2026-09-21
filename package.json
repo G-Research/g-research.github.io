@@ -2,7 +2,6 @@
   "name": "g-research",
   "version": "0.1.0",
   "private": false,
-  "type": "module",
   "description": "Open-Source Software at G-Research",
   "author": "G-Research",
   "keywords": [
@@ -10,30 +9,40 @@
     "oss"
   ],
   "scripts": {
-    "develop": "vite --port 9000",
-    "start": "vite --port 9000",
-    "build": "vite build && cp dist/index.html dist/404.html",
-    "serve": "vite preview --port 9000",
-    "clean": "rm -rf dist node_modules/.vite",
+    "develop": "gatsby develop --port 9000",
+    "start": "gatsby develop --port 9000",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
-},
+  },
   "dependencies": {
-    "@mantine/core": "^9",
-    "@mantine/hooks": "^9",
-    "@tabler/icons-react": "^3.46.0",
+    "@mantine/carousel": "^7.17.3",
+    "@mantine/core": "^7.17.3",
+    "@mantine/dates": "^7.17.3",
+    "@mantine/form": "^7.17.3",
+    "@mantine/hooks": "^7.17.3",
+    "@mantine/modals": "^7.17.3",
+    "@tabler/icons-react": "^3.33.0",
     "dayjs": "^1.11.13",
-    "postcss": "^8.5.26",
-    "postcss-preset-mantine": "^1.18.0",
+    "embla-carousel-react": "^7.1.0",
+    "gatsby": "^5.16.1",
+    "gatsby-plugin-postcss": "^6.16.0",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.1.0",
-    "typescript": "^7",
-    "vite": "^8.2.2"
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
+    "gatsby-plugin-dts-css-modules": "^3.0.0",
+    "gatsby-plugin-tsconfig-paths": "^1.0.6",
+    "typescript": "^5.8.3"
+  },
+  "resolutions": {
+    "base-x": "^3.0.11"
   }
 }
