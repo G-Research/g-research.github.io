@@ -3,6 +3,7 @@ import {
     Checkbox,
     Fieldset,
     Grid,
+    Group,
     MultiSelect,
     Select,
     SimpleGrid,
@@ -12,6 +13,7 @@ import {
 } from '@mantine/core'
 import {IconSearch} from '@tabler/icons-react'
 import {
+    COLLECTED_AT,
     filter_repositories,
     get_language_options,
     get_topic_options,
@@ -22,6 +24,25 @@ import ProjectCard from './ProjectCard'
 
 type Props = {
     repositories: Repository[]
+}
+
+function timeAgo(date: Date): string {
+    const seconds = Math.round((date.getTime() - Date.now()) / 1000)
+    const units: [Intl.RelativeTimeFormatUnit, number][] = [
+        ['year', 31536000],
+        ['month', 2592000],
+        ['day', 86400],
+        ['hour', 3600],
+        ['minute', 60],
+    ]
+    const formatter = new Intl.RelativeTimeFormat(undefined, {numeric: 'auto'})
+
+    for (const [unit, size] of units) {
+        if (Math.abs(seconds) >= size) {
+            return formatter.format(Math.round(seconds / size), unit)
+        }
+    }
+    return formatter.format(seconds, 'second')
 }
 
 export default function ProjectsSection({repositories}: Props) {
@@ -118,9 +139,14 @@ export default function ProjectsSection({repositories}: Props) {
                     </Grid.Col>
                 </Grid>
 
-                <Text size="sm" c="dimmed" mb="md">
-                    {results.length} projects found
-                </Text>
+                <Group justify="space-between" align="baseline" mb="md" wrap="wrap" gap="xs">
+                    <Text size="sm" c="dimmed">
+                        {results.length} project{results.length === 1 ? '' : 's'} found
+                    </Text>
+                    <Text size="sm" c="dimmed" title={COLLECTED_AT.toLocaleString()}>
+                        Data collected {timeAgo(COLLECTED_AT)}
+                    </Text>
+                </Group>
 
                 {results.length === 0 ? (
                     <Text c="dimmed">No projects match these filters.</Text>
