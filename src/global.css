@@ -256,10 +256,15 @@ body {
     font-size: 10px;
     letter-spacing: .09em;
     text-transform: uppercase;
-    color: var(--mantine-color-orange-4);
+    color: light-dark(#a04000, var(--mantine-color-orange-4));
     background: var(--mantine-color-orange-light);
     padding: 2px 8px;
     border-radius: var(--mantine-radius-sm);
+}
+
+.project-badge.is-fork {
+    color: light-dark(#555560, #a8a8b3);
+    background: var(--surface-hover);
 }
  
 .icon-btn {

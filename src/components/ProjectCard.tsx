@@ -43,9 +43,11 @@ export default function ProjectCard({repo}: { repo: Repository }) {
                     <Text className="project-owner" c="dimmed">
                         {repo.owner_name}
                     </Text>
-                    {repo.archived && (
+                    {repo.archived ? (
                         <Text className="project-badge" mt={4}>archived</Text>
-                    )}
+                    ) : repo.fork ? (
+                        <Text className="project-badge is-fork" mt={4}>fork</Text>
+                    ) : null}
                 </Stack>
 
                 <Text size="sm" c="dimmed" ta="center" lineClamp={3}>
