@@ -37,6 +37,7 @@ export default function ProjectCard({repo}: { repo: Repository }) {
             <Stack gap="sm" align="center" style={{flex: 1}}>
                 <Avatar
                     src={withBase(repo.avatar_url) ?? sized(repo.owner_avatar_url)}
+                    alt={`${repo.name} logo`}
                     size={72}
                     radius="lg"
                 />
