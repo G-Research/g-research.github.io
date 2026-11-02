@@ -1,0 +1,259 @@
+
+:root {
+    /* Follow the OS setting until the user picks a scheme explicitly. */
+    color-scheme: light dark;
+
+    /* The accent differs per scheme because neither value works in both:
+       lime is 1.14:1 on white, royal blue is 2.34:1 on #0f0f0f. */
+    --accent: light-dark(#0f25f2, #e5fc54);
+    --accent-fg: light-dark(#ffffff, #0a0a0a);
+    --accent-hover: light-dark(#0b1cc4, #d5ee3a);
+
+    --nav-bg: light-dark(rgba(255, 255, 255, .88), rgba(15, 15, 15, .88));
+
+    --icon-btn: light-dark(rgba(0, 0, 0, .06), rgba(255, 255, 255, .07));
+    --icon-btn-hover: light-dark(rgba(0, 0, 0, .12), rgba(255, 255, 255, .14));
+
+    --surface-hover: light-dark(#f0f0f4, #242428);
+    --border-hover: light-dark(rgba(0, 0, 0, .22), rgba(255, 255, 255, .22));
+
+    /* Heavier in dark mode: a 1px border on near-black is nearly invisible,
+       so the shadow does more of the separating. */
+    --shadow-card:
+        light-dark(0 4px 12px rgba(0, 0, 0, .07), 0 4px 12px rgba(0, 0, 0, .4)),
+        light-dark(0 1px 3px rgba(0, 0, 0, .07), 0 1px 3px rgba(0, 0, 0, .8));
+    --shadow-card-hover:
+        light-dark(0 8px 24px rgba(0, 0, 0, .1), 0 8px 24px rgba(0, 0, 0, .55)),
+        light-dark(0 2px 6px rgba(0, 0, 0, .12), 0 2px 6px rgba(0, 0, 0, .9));
+    --shadow-nav:
+        light-dark(0 1px 3px rgba(0, 0, 0, .06), 0 1px 3px rgba(0, 0, 0, .5)),
+        light-dark(0 1px 12px rgba(0, 0, 0, .04), 0 1px 12px rgba(0, 0, 0, .3));
+}
+
+/* Mantine's toggle sets this attribute. Pinning color-scheme to match keeps
+   light-dark() in step with an explicit choice instead of the OS setting.
+   These two rules are the only colour-scheme attribute selectors left; the
+   logo swap below uses `display`, which light-dark() cannot express. */
+[data-mantine-color-scheme='light'] {
+    color-scheme: light;
+}
+
+[data-mantine-color-scheme='dark'] {
+    color-scheme: dark;
+}
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mantine-color-default-border);
+    box-shadow: var(--shadow-nav);
+}
+
+body {
+    background: var(--mantine-color-body);
+}
+
+/* --------------------------------------------------------------------
+   Accent utilities
+   Mantine's `color` prop only accepts theme colour names, not CSS
+   variables, so accent-coloured elements use these classes instead.
+   -------------------------------------------------------------------- */
+
+.accent-text {
+    color: var(--accent);
+}
+
+.accent-button {
+    background: var(--accent);
+    color: var(--accent-fg);
+    border: none;
+}
+
+.accent-button:hover {
+    background: var(--accent-hover);
+}
+
+
+/* --------------------------------------------------------------------
+   Layout pieces
+   -------------------------------------------------------------------- */
+
+
+/* Blueprint grid behind the hero. Decorative, so hidden from assistive
+   tech by virtue of being a background rather than an element. */
+.grid-bg {
+    position: relative;
+    isolation: isolate;
+}
+
+.grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        repeating-linear-gradient(to right,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 48px),
+        repeating-linear-gradient(to bottom,
+            var(--mantine-color-default-border) 0 1px,
+            transparent 1px 48px);
+    opacity: .6;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+
+.section-heading {
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+}
+
+.section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--mantine-color-default-border);
+}
+
+/* --------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------- */
+
+
+.project-card {
+    background: var(--mantine-color-default);
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.project-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (forced-colors: active) {
+    .mantine-Checkbox-input:checked {
+        background-color: Highlight;
+        border-color: Highlight;
+    }
+
+    .mantine-Checkbox-icon {
+        color: HighlightText;
+    }
+}
+
+.logo-for-light,
+.logo-for-dark {
+    display: block;
+    width: auto;
+    object-fit: contain;
+}
+
+[data-mantine-color-scheme='dark'] .logo-for-light {
+    display: none;
+}
+
+[data-mantine-color-scheme='light'] .logo-for-dark {
+    display: none;
+}
+
+
+.footer {
+    background: var(--mantine-color-default);
+    border-top: 1px solid var(--mantine-color-default-border);
+    margin-top: var(--mantine-spacing-xl);
+}
+
+
+@media (max-width: 48em) {
+    .footer-row {
+        justify-content: center;
+        text-align: center;
+        gap: var(--mantine-spacing-lg);
+    }
+
+    .footer-row > * {
+        justify-content: center;
+    }
+
+    .footer-brand {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        max-width: none;
+    }
+
+    .hero-stack {
+        max-width: none;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-cta {
+        justify-content: center;
+    }
+}
+
+.hero-eyebrow {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+
+.project-owner {
+    font-size: var(--mantine-font-size-sm);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.project-badge {
+    font-size: 10px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: light-dark(#a04000, var(--mantine-color-orange-4));
+    background: var(--mantine-color-orange-light);
+    padding: 2px 8px;
+    border-radius: var(--mantine-radius-sm);
+}
+
+.project-badge.is-fork {
+    color: light-dark(#555560, #a8a8b3);
+    background: var(--surface-hover);
+}
+
+.icon-btn {
+    background: var(--icon-btn);
+}
+
+.icon-btn:hover {
+    background: var(--icon-btn-hover);
+}
+
+.hero-sub {
+    display: block;
+    font-size: .5em;
+    font-weight: 900;
+    color: var(--mantine-color-text);
+}
+
+/* Inputs and unticked checkboxes are identified only by their border,
+   so WCAG 1.4.11 needs 3:1 here. #8f8f99 is 3.2:1 on white. */
+.mantine-Input-input,
+.mantine-Checkbox-input {
+    border-color: light-dark(#8f8f99, var(--mantine-color-default-border));
+}

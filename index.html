@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)"/>
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+    <link rel="icon" href="/favicon.ico"/>
+    
+    <!-- Sets the colour-scheme attribute before first paint so Mantine's own
+         tokens resolve immediately. Gatsby did this with <ColorSchemeScript>
+         in gatsby-ssr.tsx; a client-only build has to inline it. Logic copied
+         verbatim from Mantine's ColorSchemeScript with defaultColorScheme
+         "auto", to match MantineProvider in main.tsx. -->
+    <script data-mantine-script="true">
+        try {
+            var _colorScheme = window.localStorage.getItem("mantine-color-scheme-value");
+            var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "auto";
+            var computedColorScheme = colorScheme !== "auto" ? colorScheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            document.documentElement.setAttribute("data-mantine-color-scheme", computedColorScheme);
+        } catch (e) {
+        }
+    </script>
+
+    <title>Open-Source Software at G-Research</title>
+    <meta name="description"
+          content="Explore G-Research's open-source projects and learn more about our Open Source Program Office."/>
+
+    <!-- Link previews. -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="G-Research"/>
+    <meta property="og:title" content="Open-Source Software at G-Research"/>
+    <meta property="og:description"
+          content="Explore G-Research's open-source projects and learn more about our Open Source Program Office."/>
+    <meta property="og:url" content="https://g-research.github.io/"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@oss_gr"/>
+    <link rel="canonical" href="https://g-research.github.io/"/>
+</head>
+<body>
+<div id="root"></div>
+<noscript>
+    <div style="max-width: 42rem; margin: 4rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.6;">
+        <h1>Open-Source Software at G-Research</h1>
+        <p>
+            This page lists G-Research's open-source projects and needs JavaScript
+            to render them. Browse the projects directly on
+            <a href="https://github.com/G-Research">github.com/G-Research</a>,
+            or fetch the full project data as JSON from
+            <a href="/data/repositories.json">/data/repositories.json</a>.
+        </p>
+    </div>
+</noscript>
+<script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

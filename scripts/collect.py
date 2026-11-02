@@ -1,5 +1,5 @@
 """
-Collect repositories from GitHub and save them to a JSON file in the 'static/data' directory.
+Collect repositories from GitHub and save them to a JSON file in the 'src/data' directory.
 """
 
 import typing as t
@@ -14,7 +14,7 @@ import fire
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 logger.debug(f"PROJECT_DIR: {PROJECT_DIR}")
 STATIC_DIR = PROJECT_DIR / "static"
-OUTPUT_DIR = PROJECT_DIR / "static" / "data"
+OUTPUT_DIR = PROJECT_DIR / "src" / "data"
 
 
 class Repository(pd.BaseModel):
@@ -93,6 +93,16 @@ def get_current_user(g: Github) -> t.Optional[str]:
     except (UnknownObjectException, GithubException) as e:
         logger.warning(f"no current user found: {e}")
 
+def normalize_url(value: t.Optional[str]) -> t.Optional[str]:
+    """GitHub lets a repository homepage be stored without a scheme, e.g.
+    'example.com'. pydantic's HttpUrl rejects that, and because the model is
+    built inside the collection loop, one such entry aborts the entire run."""
+    if not value or not value.strip():
+        return None
+    value = value.strip()
+    if not value.startswith(("http://", "https://")):
+        return f"https://{value}"
+    return value
 
 def extract_url(text: str, matcher: t.Callable[[str], bool]) -> t.Optional[str]:
     """Extract first matching url."""
@@ -131,8 +141,12 @@ def collect_repositories(
     current_user = get_current_user(g)
     if current_user:
         logger.success(f"authenticated as '{current_user}'")
+    elif access_token:
+        # GITHUB_TOKEN in Actions is an installation token, and /user rejects
+        # it, so the identity lookup fails even though the token is valid.
+        logger.info("authenticated, but could not resolve a user identity")
     else:
-        logger.warning("not authenticated!")
+        logger.warning("no access token given, running unauthenticated")
     for user_id in users:
         if limit is not None and len(all_repos) >= limit:
             break
@@ -166,43 +180,49 @@ def collect_repositories(
                         lambda url: "slack.com" in url and any(
                             sub in url for sub in ['join.', 'archives', 'shared_invite/', 'messages/'])
                     )
-            all_repos.append(
-                Repository(
-                    id=repo_id,
-                    name=gh_repo.name,
-                    full_name=gh_repo.full_name,
-                    avatar_url=f"/{avatar_relative_path}" if (STATIC_DIR / avatar_relative_path).exists() else None,
-                    description=gh_repo.description,
-                    topics=gh_repo.topics,
-                    owner_id=owner_id,
-                    owner_name=gh_repo.owner.login,
-                    owner_avatar_url=gh_repo.owner.avatar_url,
-                    owner_url=gh_repo.owner.html_url,
-                    stargazers_count=gh_repo.stargazers_count,
-                    forks_count=gh_repo.forks_count,
-                    open_issues_count=gh_repo.open_issues_count,
-                    watchers_count=gh_repo.watchers_count,
-                    size=gh_repo.size,
-                    url=gh_repo.html_url,
-                    website_url=gh_repo.homepage or None,
-                    discord_url=discord_url,
-                    slack_url=slack_url,
-                    created_at=gh_repo.created_at,
-                    updated_at=gh_repo.updated_at,
-                    pushed_at=gh_repo.pushed_at,
-                    private=gh_repo.private,
-                    fork=gh_repo.fork,
-                    archived=gh_repo.archived,
-                    disabled=gh_repo.raw_data.get("disabled", False),
-                    allow_forking=gh_repo.allow_forking,
-                    is_template=gh_repo.is_template,
-                    main_language=gh_repo.language,
-                    languages=gh_repo.get_languages() if fetch_languages else {},
-                    license_key=gh_repo.license.key if gh_repo.license else None,
-                    license_name=gh_repo.license.name if gh_repo.license else None,
-                    default_branch=gh_repo.default_branch,
-                    visibility=gh_repo.visibility,
-                ))
+            try:
+                all_repos.append(
+                    Repository(
+                        id=repo_id,
+                        name=gh_repo.name,
+                        full_name=gh_repo.full_name,
+                        avatar_url=f"/{avatar_relative_path}" if (STATIC_DIR / avatar_relative_path).exists() else None,
+                        description=gh_repo.description,
+                        topics=gh_repo.topics,
+                        owner_id=owner_id,
+                        owner_name=gh_repo.owner.login,
+                        owner_avatar_url=gh_repo.owner.avatar_url,
+                        owner_url=gh_repo.owner.html_url,
+                        stargazers_count=gh_repo.stargazers_count,
+                        forks_count=gh_repo.forks_count,
+                        open_issues_count=gh_repo.open_issues_count,
+                        watchers_count=gh_repo.watchers_count,
+                        size=gh_repo.size,
+                        url=gh_repo.html_url,
+                        website_url=normalize_url(gh_repo.homepage),
+                        discord_url=discord_url,
+                        slack_url=slack_url,
+                        created_at=gh_repo.created_at,
+                        updated_at=gh_repo.updated_at,
+                        pushed_at=gh_repo.pushed_at,
+                        private=gh_repo.private,
+                        fork=gh_repo.fork,
+                        archived=gh_repo.archived,
+                        disabled=gh_repo.raw_data.get("disabled", False),
+                        allow_forking=gh_repo.allow_forking,
+                        is_template=gh_repo.is_template,
+                        main_language=gh_repo.language,
+                        languages=gh_repo.get_languages() if fetch_languages else {},
+                        license_key=gh_repo.license.key if gh_repo.license else None,
+                        license_name=gh_repo.license.name if gh_repo.license else None,
+                        default_branch=gh_repo.default_branch,
+                        visibility=gh_repo.visibility,
+                    ))
+            except pd.ValidationError as e:
+                # One repository with unexpected data must not abort the whole
+                # run, or the site builds from stale data or none at all.
+                logger.warning(f"skipping '{repo_id}': {e.error_count()} invalid field(s) — {e}")
+                continue
     g.close()
     all_repos = list({rp.id: rp for rp in all_repos}.values())  # remove duplicates
     all_repos.sort(key=lambda rp: rp.id)  # sort by id

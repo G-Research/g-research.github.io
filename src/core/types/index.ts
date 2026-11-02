@@ -1,41 +1,16 @@
-export type DataProps = {
-    site: {
-        siteMetadata: {
-            // metadata
-            title: string,
-            description: string,
-            siteUrl: string,
-            repositoryUrl: string,
-            builtAt: Date,
-            // social links
-            githubUrl: string,
-            xUrl: string,
-            youtubeUrl: string,
-            // footer links
-            joinUsUrl: string,
-            websiteUrl: string,
-            blogUrl: string,
-            careersUrl: string,
-            // featured projects
-            featured: string[],
-        }
-    }
-}
-
-
 export type Repository = {
     // info
     id: string,  // full_name lowercase
     name: string,
     full_name: string,
-    avatar_url?: string | URL,  // hosted_logo
-    description?: string,
+    avatar_url: string | null,  // root-relative hosted logo, null when there is none
+    description: string | null,
     topics: string[],
     // owner
     owner_id: string,  // username lowercase
     owner_name: string,  // username
-    owner_avatar_url: URL,
-    owner_url: URL,
+    owner_avatar_url: string,
+    owner_url: string,
     // stats
     stargazers_count: number,
     forks_count: number,
@@ -43,14 +18,15 @@ export type Repository = {
     watchers_count: number,
     size: number,
     // urls
-    url: URL,
-    website_url?: URL,
-    discord_url?: URL,
-    slack_url?: URL,
-    // timestamps
-    created_at?: string | Date,  // iso datetime example: 2011-01-26T19:14:43Z
-    updated_at?: string | Date,  // iso datetime
-    pushed_at?: string | Date,  // iso datetime
+    url: string,
+    website_url: string | null,
+    discord_url: string | null,
+    slack_url: string | null,
+    // timestamps — load_repositories() turns the ISO strings into Dates, so
+    // this describes the loaded shape rather than the raw JSON
+    created_at: Date | null,
+    updated_at: Date | null,
+    pushed_at: Date | null,
     // flags
     private: boolean,
     fork: boolean,
@@ -59,12 +35,12 @@ export type Repository = {
     allow_forking: boolean,
     is_template: boolean,
     // languages
-    main_language?: string,
+    main_language: string | null,
     languages: Record<string, number>,
     // license
-    license_key?: string,
-    license_name?: string,
+    license_key: string | null,
+    license_name: string | null,
     // other
     default_branch: string,
-    visibility?: "public" | "private" | "internal",
+    visibility: "public" | "private" | "internal",
 }
