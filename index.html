@@ -4,6 +4,21 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" href="/favicon.ico"/>
+    
+    <!-- Sets the colour-scheme attribute before first paint so Mantine's own
+         tokens resolve immediately. Gatsby did this with <ColorSchemeScript>
+         in gatsby-ssr.tsx; a client-only build has to inline it. Logic copied
+         verbatim from Mantine's ColorSchemeScript with defaultColorScheme
+         "auto", to match MantineProvider in main.tsx. -->
+    <script data-mantine-script="true">
+        try {
+            var _colorScheme = window.localStorage.getItem("mantine-color-scheme-value");
+            var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "auto";
+            var computedColorScheme = colorScheme !== "auto" ? colorScheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            document.documentElement.setAttribute("data-mantine-color-scheme", computedColorScheme);
+        } catch (e) {
+        }
+    </script>
 
     <title>Open-Source Software at G-Research</title>
     <meta name="description"
