@@ -5,7 +5,7 @@ import Hero from '@components/Hero'
 import Featured from '@components/Featured'
 import ProjectsSection from '@components/ProjectsSection'
 import Footer from '@components/Footer'
-import {Container, Title} from '@mantine/core'
+import {Container} from '@mantine/core'
 import SectionHeading from '@components/SectionHeading'
 import NotFound from '@components/NotFound'
 
@@ -18,7 +18,7 @@ function isHomePage() {
 export default function App() {
     // Called once: App holds no state, so it never re-renders.
     const repositories = load_repositories()
-    const featured = get_featured_projects(repositories, [...site.featured]).slice(0, 3)
+    const featured = get_featured_projects(repositories, [...site.featured])
 
     return (
     <>
