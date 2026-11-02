@@ -1,7 +1,7 @@
 {
   "name": "g-research",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "description": "Open-Source Software at G-Research",
   "author": "G-Research",
@@ -9,6 +9,9 @@
     "g-research",
     "oss"
   ],
+    "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "develop": "vite --port 9000",
     "start": "vite --port 9000",
