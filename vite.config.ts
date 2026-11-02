@@ -11,8 +11,6 @@ export default defineConfig({
 
     plugins: [react()],
 
-    // Everything in static/ is copied to the site root untouched, so
-    // /data/repositories.json and /hosted_logos/** keep their current URLs.
     publicDir: 'static',
 
     
