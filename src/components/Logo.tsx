@@ -1,40 +1,37 @@
 import {Group, Text} from '@mantine/core'
-import headerDark from '../assets/logo-header-dark.png'
-import headerWhite from '../assets/logo-header-white.png'
-import footerDark from '../assets/logo-footer-dark.png'
-import footerWhite from '../assets/logo-footer-white.png'
+// The dark mark sits on light backgrounds and vice versa; global.css swaps
+// them by colour scheme, since `display` is not something light-dark() can do.
+import markDark from '../assets/logo-header-dark.png'
+import markLight from '../assets/logo-header-white.png'
 import {site} from '@core/site'
 
 type Props = {
-    /** Which logo pair to use. */
-    variant?: 'header' | 'footer'
     /** Height of the logo mark in px. */
     size?: number
     /** Show the site name next to the mark. */
     withText?: boolean
 }
 
-const ASPECT = {header: 827 / 1020, footer: 591 / 241}
+// Measured from the PNGs: 827x1020. Both dimensions are set so the browser
+// reserves space instead of shifting the layout as the images arrive.
+const ASPECT = 827 / 1020
 
-export default function Logo({variant = 'header', size = 28, withText = true}: Props) {
-    const forLightMode = variant === 'header' ? headerDark : footerDark
-    const forDarkMode = variant === 'header' ? headerWhite : footerWhite
-
+export default function Logo({size = 28, withText = true}: Props) {
     return (
         <Group gap="xs" wrap="nowrap">
             <img
                 className="logo-for-light"
-                src={forLightMode}
+                src={markDark}
                 alt={withText ? '' : site.title}
                 height={size}
-                width={Math.round(size * ASPECT[variant])}
+                width={Math.round(size * ASPECT)}
             />
             <img
                 className="logo-for-dark"
-                src={forDarkMode}
+                src={markLight}
                 alt={withText ? '' : site.title}
                 height={size}
-                width={Math.round(size * ASPECT[variant])}
+                width={Math.round(size * ASPECT)}
             />
             {withText && (
                 <Text fw={600} size="sm">{site.description}</Text>

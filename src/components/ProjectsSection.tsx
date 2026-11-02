@@ -102,6 +102,8 @@ export default function ProjectsSection({repositories}: Props) {
                         onChange={setLanguages}
                         searchable
                         clearable
+                        checkIconPosition="right"
+                        hidePickedOptions
                     />
 
                     <MultiSelect

@@ -22,7 +22,7 @@ export default function Footer() {
                 {/* Top: square logo and blurb left, Join us right */}
                 <Group className="footer-row" justify="space-between" align="center" wrap="wrap" gap="xl">
                     <Group className="footer-brand" gap="md" wrap="nowrap" align="center" maw="62ch">
-                        <Logo variant="header" size={100} withText={false}/>
+                        <Logo size={100} withText={false}/>
                         <Text size="md" c="dimmed">
                             We hire the brightest minds to tackle the biggest questions in finance.
                             We pair our people's expertise with machine learning, big data, and

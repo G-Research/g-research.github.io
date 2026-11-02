@@ -35,7 +35,7 @@ export default function Header() {
         <header className="nav">
             <Container size="xl" py="md">
                 <Group justify="space-between" wrap="nowrap">
-                    <Logo variant="header" size={36}/>
+                    <Logo size={36}/>
 
                     {isMobile ? (
                         <Group gap="xs" wrap="nowrap">
