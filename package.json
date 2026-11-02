@@ -21,10 +21,6 @@
     "@mantine/core": "^9",
     "@mantine/hooks": "^9",
     "@tabler/icons-react": "^3.46.0",
-    "dayjs": "^1.11.13",
-    "postcss": "^8.5.26",
-    "postcss-preset-mantine": "^1.18.0",
-    "postcss-simple-vars": "^7.0.1",
     "react": "^19",
     "react-dom": "^19"
   },
@@ -34,6 +30,9 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.1.0",
     "typescript": "^7",
-    "vite": "^8.2.2"
+    "vite": "^8.2.2",
+    "postcss": "^8.5.26",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1"
   }
 }

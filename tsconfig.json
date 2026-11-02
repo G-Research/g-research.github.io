@@ -12,8 +12,7 @@
     /* TypeScript 7 removed `baseUrl`, so these are relative to this file. */
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@core/*": ["./src/core/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@core/*": ["./src/core/*"]
     },
     "resolveJsonModule": true,
     "types": ["vite/client"],
@@ -31,8 +30,7 @@
     "skipLibCheck": true
   },
   
-  "include": ["./src/**/*", "./vite.config.ts", "./src/components/Logo.tsx",]
-}
+  "include": ["./src/**/*", "./vite.config.ts", "./scripts/postbuild.mjs"]}
  
 
 

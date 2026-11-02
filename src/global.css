@@ -41,7 +41,7 @@
 [data-mantine-color-scheme='dark'] {
     color-scheme: dark;
 }
- 
+
 .nav {
     position: sticky;
     top: 0;
@@ -76,43 +76,11 @@ body {
     background: var(--accent-hover);
 }
 
-/* Checkbox uses the accent rather than a fixed blue. In dark mode the
-   Figma blue was 2.34:1 against the background, failing WCAG 1.4.11
-   for a control that conveys state. */
-.accent-checkbox input:checked {
-    background-color: var(--accent);
-    border-color: var(--accent);
-}
-
-.accent-checkbox input:checked + svg {
-    color: var(--accent-fg);
-}
 
 /* --------------------------------------------------------------------
    Layout pieces
    -------------------------------------------------------------------- */
 
-/* Replace the existing .nav block in global.css with this. */
-
-/* Replace the existing .nav block in global.css with this. */
-
-.nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--mantine-color-default-border);
-    /* Subtle lift so the bar reads as above the page when content
-       scrolls under it. Heavier in dark mode, where a 1px border alone
-       is nearly invisible. */
-    
-}
-
-.sidebar {
-    background: var(--sidebar-bg);
-    border-radius: var(--mantine-radius-lg);
-}
 
 /* Blueprint grid behind the hero. Decorative, so hidden from assistive
    tech by virtue of being a background rather than an element. */
@@ -120,7 +88,7 @@ body {
     position: relative;
     isolation: isolate;
 }
- 
+
 .grid-bg::before {
     content: '';
     position: absolute;
@@ -138,7 +106,7 @@ body {
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
 }
- 
+
 
 .section-heading {
     text-transform: uppercase;
@@ -146,13 +114,13 @@ body {
     white-space: nowrap;
     font-size: clamp(1.1rem, 2.2vw, 1.6rem);
 }
- 
+
 .section-rule {
     flex: 1;
     height: 1px;
     background: var(--mantine-color-default-border);
 }
- 
+
 /* --------------------------------------------------------------------
    Cards
    -------------------------------------------------------------------- */
@@ -162,23 +130,13 @@ body {
     background: var(--mantine-color-default);
     transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
- 
+
 .project-card:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
 }
- 
 
-/* Neutral fallback tile when a repo has no hosted logo. */
-.logo-fallback {
-    display: grid;
-    place-items: center;
-    background: var(--surface-hover);
-    color: var(--mantine-color-dimmed);
-    font-weight: 700;
-    border-radius: var(--mantine-radius-md);
-}
 
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -209,14 +167,14 @@ body {
     margin-top: var(--mantine-spacing-xl);
 }
 
- 
+
 @media (max-width: 48em) {
     .footer-row {
         justify-content: center;
         text-align: center;
         gap: var(--mantine-spacing-lg);
     }
- 
+
     .footer-row > * {
         justify-content: center;
     }
@@ -233,7 +191,7 @@ body {
         text-align: center;
         align-items: center;
     }
- 
+
     .hero-cta {
         justify-content: center;
     }
@@ -244,14 +202,14 @@ body {
     letter-spacing: .12em;
     text-transform: uppercase;
 }
- 
- 
+
+
 .project-owner {
     font-size: var(--mantine-font-size-sm);
     letter-spacing: .08em;
     text-transform: uppercase;
 }
- 
+
 .project-badge {
     font-size: 10px;
     letter-spacing: .09em;
@@ -266,15 +224,15 @@ body {
     color: light-dark(#555560, #a8a8b3);
     background: var(--surface-hover);
 }
- 
+
 .icon-btn {
     background: var(--icon-btn);
 }
- 
+
 .icon-btn:hover {
     background: var(--icon-btn-hover);
 }
- 
+
 .hero-sub {
     display: block;
     font-size: .5em;
