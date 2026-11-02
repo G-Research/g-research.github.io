@@ -6,11 +6,17 @@ import type {Repository} from '@core/types'
 // BASE_URL is "/" normally and "/<repo>/" on forks, so this keeps logos
 // resolving in both. Gatsby did the same job with withPrefix().
 function withBase(path?: string | URL | null): string | undefined {
+    // GitHub serves owner avatars at full resolution. The card shows them at
+    // 72px, so ask for 144 for retina rather than downloading 460px or larger.
     if (!path) return undefined
     const s = String(path)
     if (s.startsWith('http')) return s
     return import.meta.env.BASE_URL.replace(/\/$/, '') + s
 }
+
+function sized(url: string): string {
+    return url.includes('?') ? `${url}&s=144` : `${url}?s=144`
+    }
 
 export default function ProjectCard({repo}: { repo: Repository }) {
     const stats = [
@@ -30,8 +36,7 @@ export default function ProjectCard({repo}: { repo: Repository }) {
         <Card className="project-card" withBorder padding="lg" radius="lg" h="100%">
             <Stack gap="sm" align="center" style={{flex: 1}}>
                 <Avatar
-                    src={withBase(repo.avatar_url) ?? String(repo.owner_avatar_url)}
-                    alt={`${repo.name} logo`}
+                    src={withBase(repo.avatar_url) ?? sized(repo.owner_avatar_url)}
                     size={72}
                     radius="lg"
                 />

@@ -141,8 +141,12 @@ def collect_repositories(
     current_user = get_current_user(g)
     if current_user:
         logger.success(f"authenticated as '{current_user}'")
+    elif access_token:
+        # GITHUB_TOKEN in Actions is an installation token, and /user rejects
+        # it, so the identity lookup fails even though the token is valid.
+        logger.info("authenticated, but could not resolve a user identity")
     else:
-        logger.warning("not authenticated!")
+        logger.warning("no access token given, running unauthenticated")
     for user_id in users:
         if limit is not None and len(all_repos) >= limit:
             break
