@@ -1,7 +1,8 @@
 import {Group, Title} from '@mantine/core'
+import type {ReactNode} from 'react'
 
 type Props = {
-    children: React.ReactNode
+    children: ReactNode
     /** Heading level. Defaults to 2. */
     order?: 1 | 2 | 3
 }
@@ -15,7 +16,7 @@ export default function SectionHeading({children, order = 2}: Props) {
     return (
         <Group gap="lg" wrap="nowrap" mb="xl">
             <span className="section-rule" aria-hidden="true"/>
-            <Title order={order} className="section-heading" c="">
+            <Title order={order} className="section-heading">
                 {children}
             </Title>
             <span className="section-rule" aria-hidden="true"/>

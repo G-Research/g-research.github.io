@@ -52,7 +52,7 @@ export default function Header() {
                                         opened={opened}
                                         onClick={toggle}
                                         size="sm"
-                                        aria-label="Open menu"
+                                                                                aria-label={opened ? 'Close menu' : 'Open menu'}
                                     />
                                 </Menu.Target>
                                 <Menu.Dropdown>

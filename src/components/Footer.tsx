@@ -1,4 +1,4 @@
-import {ActionIcon, Anchor, Button, Container, Divider, Group, Stack, Text} from '@mantine/core'
+import {ActionIcon, Anchor, Button, Container, Divider, Group, Text} from '@mantine/core'
 import {IconArrowRight, IconBrandGithub, IconBrandX, IconBrandYoutube} from '@tabler/icons-react'
 import {site} from '@core/site'
 import Logo from './Logo'

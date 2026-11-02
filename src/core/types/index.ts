@@ -1,27 +1,3 @@
-export type DataProps = {
-    site: {
-        siteMetadata: {
-            // metadata
-            title: string,
-            description: string,
-            siteUrl: string,
-            repositoryUrl: string,
-            builtAt: Date,
-            // social links
-            githubUrl: string,
-            xUrl: string,
-            youtubeUrl: string,
-            // footer links
-            joinUsUrl: string,
-            websiteUrl: string,
-            blogUrl: string,
-            careersUrl: string,
-            // featured projects
-            featured: string[],
-        }
-    }
-}
-
 
 export type Repository = {
     // info
