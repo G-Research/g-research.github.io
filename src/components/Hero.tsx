@@ -17,7 +17,7 @@ export default function Hero() {
                     {/* Two-tone headline. One h1 with a span inside, so screen
                         readers still read a single heading. */}
                     <Title order={1} maw="22ch">
-                        <span className="accent-text">Open-Source Software</span>
+                        <span className="accent-text">Open-Source Software</span>{' '}
                         <span className="hero-sub">at G-Research</span>
                     </Title>
 

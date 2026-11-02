@@ -14,6 +14,7 @@ type Props = {
     withText?: boolean
 }
 
+const ASPECT = {header: 827 / 1020, footer: 591 / 241}
 
 export default function Logo({variant = 'header', size = 28, withText = true}: Props) {
     const forLightMode = variant === 'header' ? headerDark : footerDark
@@ -26,12 +27,14 @@ export default function Logo({variant = 'header', size = 28, withText = true}: P
                 src={forLightMode}
                 alt={withText ? '' : site.title}
                 height={size}
+                width={Math.round(size * ASPECT[variant])}
             />
             <img
                 className="logo-for-dark"
                 src={forDarkMode}
                 alt={withText ? '' : site.title}
                 height={size}
+                width={Math.round(size * ASPECT[variant])}
             />
             {withText && (
                 <Text fw={600} size="sm">{site.description}</Text>

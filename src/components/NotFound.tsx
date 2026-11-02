@@ -1,11 +1,7 @@
 import {Button, Container, Stack, Text, Title} from '@mantine/core'
 import {IconArrowLeft} from '@tabler/icons-react'
 
-/**
- * Shown for any path other than the home page. On GitHub Pages this is
- * reached via 404.html, which the build copies from index.html. Copy
- * matches the original Gatsby 404 page.
- */
+
 export default function NotFound() {
     return (
         <Container size="sm" py={120}>

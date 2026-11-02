@@ -113,6 +113,8 @@ export default function ProjectsSection({repositories}: Props) {
                         onChange={setTopics}
                         searchable
                         clearable
+                        checkIconPosition="right"
+                        hidePickedOptions
                     />
                 </Fieldset>
             </Grid.Col>
